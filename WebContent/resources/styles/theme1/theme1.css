@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* NOTE: COLOR PALETTE
+logotype: #ffffff & #a1d15e
+background: #a1d15e
+header: #2f451d
+text: primary #ffffff, body #917640, footer #719950
+
+
+/* LAYOUT CONTAINERS */
+#CONTAINER_MAIN {
+	background-color: #a1d15e;
+	padding: 0% 15% 0% 15%;
+}
+#container_page{
+	background-color: #ffffde;
+	width: 800px;
+	margin: auto;
+}
+#container_header{
+	display: flex;
+	flex-flow: column wrap;
+	align-items: stretch;
+	background-color: #2f451d;
+	min-height: 60px;
+	padding-top: 30px;
+}
+#container_body {
+	margin:80px 0px 100px 0px;
+}
+#container_footer {
+	background-color: #2f451d;
+	height: 60px;
+	padding: 40px 10px 10px 10px;
+	color: #719950; 
+}
+/* end layout containers */
+
+
+/* HEADER / DROPDOWN STYLING */
+#container_stripe{
+	flex-grow: 1;
+	background-color: #2f451d;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+	justify-content: space-around;
+}
+#container_title{
+	flex-grow: 11;
+	margin-top: 16px;
+	padding-left: 12px;
+}
+#container_title h1 {
+	font-family: 'Comfortaa', cursive;
+}
+.header_text {
+	color: white;
+	display: inline;
+}
+#container_dropdown{
+	flex-grow: 1;
+	position: relative;
+	font-family: 'Poppins', 'Arial', sans-serif;
+}
+#dropdown_button {
+	color: white;
+	border: none;
+	width: 100%;
+	height: 100%;
+	background-color: #2f451d;
+	text-align: center;
+	font-size: 18px;
+}
+#dropdown_options {
+	display: none;
+	position: absolute;
+	width: 100%;
+	background-color: #2f451d;
+	text-align: center;
+	color: white;
+	z-index: 1;
+}
+/* TODO: fix anchors so clickable area fills box area of option */
+#dropdown_options a {
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	color: white;
+}
+/* TODO: fix so displayed menu options cast shadow */
+#container_dropdown:hover #dropdown_options {
+	display: flex;
+	flex-direction: column;
+}
+#dropdown_options :hover {
+	background-color: #1a3802;
+}
+#dropdown_button :hover {
+}
+/* end header dropdown styling */
+
+
+
+/* PAGE BODY STYLING */
+/* index.html stlying */
+.button_body {
+	margin: 27px 10% 27px 10%;
+	height: 100px;
+	width: auto;
+	background-color: #ffffde;
+	border: solid #917640 2px;
+	border-radius: 30px;
+	text-align: center;
+	box-shadow: 3px 3px 8px 0px  #594721;
+}
+.button_body a {
+	display: inline-block;
+	height: 100px;
+	width: 100%;
+	border-radius: 27px;
+	text-decoration: none;
+	font-family: 'Poppins', 'Arial' sans-serif;
+	font-size: 26px;
+	color: #917640;
+	background-color: #ffffde;
+}
+.button_body :hover {
+	background-color: #917640;
+	box-shadow: inset 3px 3px 8px 0px #42351a;
+	color: white;
+}
+.button_body a :hover{
+	box-shadow: none;
+	background-color: transparent;
+}
+/* end index.html */
+
+
+/* patient_search.html */
+.container_field {
+	margin: 25px 5% 25px 5%;
+}
+#container_field_header{
+	margin-bottom: 75px;
+	text-align: center;
+	color: #917640;
+	font-size: 24px;
+}
+#container_field_header h4 {
+	font-family: 'Comfortaa', 'Arial', sans-serif;
+}
+#form_dob {
+	font-family: 'Comfortaa', 'Arial', sans-serif;
+}
+.form_input_large {
+	font-family: Arial;
+	margin: 10px 5px 10px 5px;
+	width: 500px;
+	height: 32px;
+	padding: 2px 5px 1px 5px;
+	font-size: 20px;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0px 0px 1px 1px #917640;
+}
+#form_submit {
+	width: 60px;
+	height: 38px;
+}
+#form_dropdown {
+	width: 120px;
+	height: 38px;
+}
+.form_row {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	margin: 5px 10px 5px 10px;
+}
+.form_row h4 {
+	font-family: 'Comfortaa';
+	color: #917640;
+}
+
+
+/* end patient_search.html */
+
+
+
+
+/* FOOTER STYLING */
+#container_footer p:nth-child(1){
+	display: block;
+	float: left;
+}
+#container_footer p:nth-child(2){
+	display: block;
+	float: right;
+}
+
+
+/* TEXT STYLING */
+h1, h2, h3, h4, h5, p {
+	font-family: 'Poppins', 'Arial', sans-serif;
+}
