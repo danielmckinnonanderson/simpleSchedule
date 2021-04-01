@@ -11,29 +11,29 @@ public interface PatientRepository extends CrudRepository<Patient, Integer>{
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
 	//ALL POSSIBLE PERMUTATIONS
 	
-	public Patient findByPFirstName(String pFirstName);
-	public Patient findByPFirstNameAndPLastName(String pFirstName, String pLastName);
-	public Patient findByPFirstNameAndPDob(String pFirstName, Date pDob);
-	public Patient findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary);
+	Patient findByPFirstName(String pFirstName);
+	Patient findByPFirstNameAndPLastName(String pFirstName, String pLastName);
+	Patient findByPFirstNameAndPDob(String pFirstName, Date pDob);
+	Patient findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary);
 	
-	public Patient findByPFirstNameAndPLastNameAndPDob(String pFirstName, String pLastName, Date pDob);
-	public Patient findByPFirstNameAndPLastNameAndPPrimary(
+	Patient findByPFirstNameAndPLastNameAndPDob(String pFirstName, String pLastName, Date pDob);
+	Patient findByPFirstNameAndPLastNameAndPPrimary(
 			String pFirstName, String pLastName, Integer pPrimary);
-	public Patient findByPFirstNameAndPDobAndPPrimary(String pFirstName, Date pDob, Integer pPrimary);
+	Patient findByPFirstNameAndPDobAndPPrimary(String pFirstName, Date pDob, Integer pPrimary);
 		
 	
-	public Patient findByPLastName(String pLastName);
-	public Patient findByPLastNameAndPDob(String pLastName, Date pDob);
-	public Patient findByPLastNameAndPPrimary(String pLastName, Integer pPrimary);
+	Patient findByPLastName(String pLastName);
+	Patient findByPLastNameAndPDob(String pLastName, Date pDob);
+	Patient findByPLastNameAndPPrimary(String pLastName, Integer pPrimary);
 	
-	public Patient findByPLastNameAndPDobAndPPrimary(String pLastName, Date pDob, Integer pPrimary);
+	Patient findByPLastNameAndPDobAndPPrimary(String pLastName, Date pDob, Integer pPrimary);
 	
 
-	public Patient findByPDob(Date pDob);
-	public Patient findByPDobAndPPrimary(Date pDob, Integer pPrimary);
+	Patient findByPDob(Date pDob);
+	Patient findByPDobAndPPrimary(Date pDob, Integer pPrimary);
 	
-	public Patient findByPPrimary(Integer pPrimary);
+	Patient findByPPrimary(Integer pPrimary);
 	
-	public Patient findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
+	Patient findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
 			String pFirstName, String pLastName, Date pDob, Integer pPrimaryId);	
 }
