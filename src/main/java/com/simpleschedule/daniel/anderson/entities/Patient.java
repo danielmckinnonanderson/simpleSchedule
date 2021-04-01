@@ -17,10 +17,10 @@ public class Patient {
 	private Integer pId;
 	
 	@Column(name="namef", nullable=false)
-	private String pFirstname;
+	private String pFirstName;
 	
 	@Column(name="namel", nullable=false)
-	private String pLastname;
+	private String pLastName;
 	
 	@Column(name="dob", nullable=false)
 	private Date pDob;
@@ -35,8 +35,8 @@ public class Patient {
 	public Patient(int pId, String pFirstname, String pLastname, Date pDob, int pPrimary) {
 		super();
 		this.pId = pId;
-		this.pFirstname = pFirstname;
-		this.pLastname = pLastname;
+		this.pFirstName = pFirstname;
+		this.pLastName = pLastname;
 		this.pDob = pDob;
 		this.pPrimary = pPrimary;
 	}
@@ -44,7 +44,7 @@ public class Patient {
 	@Override
 	public String toString() {
 		return String.format("Patient ID %d: %s %s, DOB: %s ", 
-				this.pId, this.pFirstname, this.pLastname, this.pDob);
+				this.pId, this.pFirstName, this.pLastName, this.pDob);
 	}	
 
 	@Override
@@ -61,17 +61,17 @@ public class Patient {
 				return false;
 		} else if (!pDob.equals(other.pDob))
 			return false;
-		if (pFirstname == null) {
-			if (other.pFirstname != null)
+		if (pFirstName == null) {
+			if (other.pFirstName != null)
 				return false;
-		} else if (!pFirstname.equals(other.pFirstname))
+		} else if (!pFirstName.equals(other.pFirstName))
 			return false;
 		if (pId != other.pId)
 			return false;
-		if (pLastname == null) {
-			if (other.pLastname != null)
+		if (pLastName == null) {
+			if (other.pLastName != null)
 				return false;
-		} else if (!pLastname.equals(other.pLastname))
+		} else if (!pLastName.equals(other.pLastName))
 			return false;
 		if (pPrimary != other.pPrimary)
 			return false;
@@ -87,19 +87,19 @@ public class Patient {
 	}
 
 	public String getpFirstname() {
-		return pFirstname;
+		return pFirstName;
 	}
 
 	public void setpFirstname(String pFirstname) {
-		this.pFirstname = pFirstname;
+		this.pFirstName = pFirstname;
 	}
 
 	public String getpLastname() {
-		return pLastname;
+		return pLastName;
 	}
 
 	public void setpLastname(String pLastname) {
-		this.pLastname = pLastname;
+		this.pLastName = pLastname;
 	}
 
 	public Date getpDob() {
