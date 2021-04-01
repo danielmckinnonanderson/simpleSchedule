@@ -1,6 +1,7 @@
 package com.simpleschedule.daniel.anderson.services;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.simpleschedule.daniel.anderson.entities.Patient;
 import com.simpleschedule.daniel.anderson.repositories.PatientRepository;
@@ -13,59 +14,102 @@ public class PatientService {
 	}
 	
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
-	public Patient findByPFirstName(String pFirstName) {
+	private List<Patient> findByPFirstName(String pFirstName) {
 		return patientRepository.findByPFirstName(pFirstName);
 	}
-	public Patient findByPFirstNameAndPLastName(String pFirstName, String pLastName) {
+	private List<Patient> findByPFirstNameAndPLastName(String pFirstName, String pLastName) {
 		return patientRepository.findByPFirstNameAndPLastName(pFirstName, pLastName);
 	}
-	public Patient findByPFirstNameAndPDob(String pFirstName, Date pDob) {
+	private List<Patient> findByPFirstNameAndPDob(String pFirstName, Date pDob) {
 		return patientRepository.findByPFirstNameAndPDob(pFirstName, pDob);
 	}
-	public Patient findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary) {
+	private List<Patient> findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary) {
 		return patientRepository.findByPFirstNameAndPPrimary(pFirstName, pPrimary);
 	}
-	public Patient findByPFirstNameAndPLastNameAndPDob(
+	private List<Patient> findByPFirstNameAndPLastNameAndPDob(
 			String pFirstName, String pLastName, Date pDob) {
 		return patientRepository.findByPFirstNameAndPLastNameAndPDob(
 				pFirstName, pLastName, pDob);
 	}
-	public Patient findByPFirstNameAndPLastNameAndPPrimary(
+	private List<Patient> findByPFirstNameAndPLastNameAndPPrimary(
 			String pFirstName, String pLastName, Integer pPrimary) {
 		return patientRepository.findByPFirstNameAndPLastNameAndPPrimary(
 				pFirstName, pLastName, pPrimary);
 	}
-	public Patient findByPFirstNameAndPDobAndPPrimary(
+	private List<Patient> findByPFirstNameAndPDobAndPPrimary(
 			String pFirstName, Date pDob, Integer pPrimary) {
 		return patientRepository.findByPFirstNameAndPDobAndPPrimary(
 				pFirstName, pDob, pPrimary);
 	}
-	public Patient findByPLastName(String pLastName) {
+	private List<Patient> findByPLastName(String pLastName) {
 		return patientRepository.findByPLastName(pLastName);
 	}
-	public Patient findByPLastNameAndPDob(String pLastName, Date pDob) {
+	private List<Patient> findByPLastNameAndPDob(String pLastName, Date pDob) {
 		return patientRepository.findByPLastNameAndPDob(pLastName, pDob);
 	}
-	public Patient findByPLastNameAndPPrimary(String pLastName, Integer pPrimary) {
+	private List<Patient> findByPLastNameAndPPrimary(String pLastName, Integer pPrimary) {
 		return patientRepository.findByPLastNameAndPPrimary(pLastName, pPrimary);
 	}
-	public Patient findByPLastNameAndPDobAndPPrimary(
+	private List<Patient> findByPLastNameAndPDobAndPPrimary(
 			String pLastName, Date pDob, Integer pPrimary) {
 		return patientRepository.findByPLastNameAndPDobAndPPrimary(
 				pLastName, pDob, pPrimary);
 	}
-	public Patient findByPDob(Date pDob) {
+	private List<Patient> findByPDob(Date pDob) {
 		return patientRepository.findByPDob(pDob);
 	}
-	public Patient findByPDobAndPPrimary(Date pDob, Integer pPrimary) {
+	private List<Patient> findByPDobAndPPrimary(Date pDob, Integer pPrimary) {
 		return patientRepository.findByPDobAndPPrimary(pDob, pPrimary);
 	}
-	public Patient findByPPrimary(Integer pPrimary) {
+	private List<Patient> findByPPrimary(Integer pPrimary) {
 		return patientRepository.findByPPrimary(pPrimary);
 	}
-	public Patient findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
+	private List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
 			String pFirstName, String pLastName, Date pDob, Integer pPrimaryId) {
 		return patientRepository.findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
 				pFirstName, pLastName, pDob, pPrimaryId);
+	}
+	
+	//HIGHER-LEVEL...DISCERNING USER INPUT AND ROUTING TO APPROPRIATE QUERY METHOD
+	public List<Patient> findPatientUsingFields(
+			String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
+		if (pFirstName != null && pLastName != null && pDob != null && pPrimary != null) {
+			return findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
+					pFirstName, pLastName, pDob, pPrimary);
+		} else if (pLastName != null && pDob != null && pPrimary != null) {
+			return findByPLastNameAndPDobAndPPrimary(
+					pLastName, pDob, pPrimary);
+		} else if (pFirstName != null && pDob != null && pPrimary != null) {
+			return findByPFirstNameAndPDobAndPPrimary(
+					pFirstName, pDob, pPrimary);
+		} else if (pFirstName != null && pLastName != null && pPrimary != null) {
+			return findByPFirstNameAndPLastNameAndPPrimary(
+					pFirstName, pLastName, pPrimary);
+		} else if (pFirstName != null && pLastName != null && pDob != null) {
+			return findByPFirstNameAndPLastNameAndPDob(
+					pFirstName, pLastName, pDob);
+		} else if (pFirstName != null && pLastName != null) {
+			return findByPFirstNameAndPLastName(pFirstName, pLastName);
+		} else if (pFirstName != null && pDob != null) {
+			return findByPFirstNameAndPDob(pFirstName, pDob);
+		} else if (pFirstName != null && pPrimary != null) {
+			return findByPFirstNameAndPPrimary(pFirstName, pPrimary);
+		} else if (pLastName != null && pDob != null) {
+			return findByPLastNameAndPDob(pLastName, pDob);
+		} else if (pLastName != null && pPrimary != null) {
+			return findByPLastNameAndPPrimary(pLastName, pPrimary);
+		} else if (pDob != null && pPrimary != null) {
+			return findByPDobAndPPrimary(pDob, pPrimary);
+		} else if (pFirstName != null) {
+			return findByPFirstName(pFirstName);
+		} else if (pLastName != null) {
+			return findByPLastName(pLastName);
+		} else if (pDob != null) {
+			return findByPDob(pDob);
+		} else if (pPrimary != null) {
+			return findByPPrimary(pPrimary);
+		} else {
+			return null;
+		}
 	}
 }
