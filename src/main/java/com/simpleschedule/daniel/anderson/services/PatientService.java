@@ -3,12 +3,17 @@ package com.simpleschedule.daniel.anderson.services;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.simpleschedule.daniel.anderson.entities.Patient;
 import com.simpleschedule.daniel.anderson.repositories.PatientRepository;
 
+@Service
 public class PatientService {
 	private PatientRepository patientRepository;
 	
+	@Autowired
 	public PatientService(PatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
 	}
@@ -64,17 +69,17 @@ public class PatientService {
 	private List<Patient> findByPPrimary(Integer pPrimary) {
 		return patientRepository.findByPPrimary(pPrimary);
 	}
-	private List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
-			String pFirstName, String pLastName, Date pDob, Integer pPrimaryId) {
-		return patientRepository.findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
-				pFirstName, pLastName, pDob, pPrimaryId);
+	private List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimary(
+			String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
+		return patientRepository.findByPFirstNameAndPLastNameAndPDobAndPPrimary(
+				pFirstName, pLastName, pDob, pPrimary);
 	}
 	
 	//HIGHER-LEVEL...DISCERNING USER INPUT AND ROUTING TO APPROPRIATE QUERY METHOD
 	public List<Patient> findPatientUsingFields(
 			String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
 		if (pFirstName != null && pLastName != null && pDob != null && pPrimary != null) {
-			return findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
+			return findByPFirstNameAndPLastNameAndPDobAndPPrimary(
 					pFirstName, pLastName, pDob, pPrimary);
 		} else if (pLastName != null && pDob != null && pPrimary != null) {
 			return findByPLastNameAndPDobAndPPrimary(
