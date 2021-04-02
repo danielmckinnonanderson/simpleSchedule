@@ -7,14 +7,14 @@ import javax.persistence.Id;
 @Entity
 public class Staff {
 	@Id
-	@Column(name="id")
+	@Column(name="id", length=3)
 	private Integer sId;
 	
 	@Column(name="namef")
-	private String sFirstname;
+	private String sFirstName;
 	
 	@Column(name="namel")
-	private String sLastname;
+	private String sLastName;
 	
 	@Column(name="locationid")
 	private Integer sLocation;
@@ -29,8 +29,8 @@ public class Staff {
 	public Staff(int sId, String sFirstname, String sLastname, int sLocation, String sTitle) {
 		super();
 		this.sId = sId;
-		this.sFirstname = sFirstname;
-		this.sLastname = sLastname;
+		this.sFirstName = sFirstname;
+		this.sLastName = sLastname;
 		this.sLocation = sLocation;
 		this.sTitle = sTitle;
 	}
@@ -38,7 +38,7 @@ public class Staff {
 	@Override
 	public String toString() {
 		return String.format("Staff ID %d: %s, %s. %s working out of location %d", 
-				sId, sLastname, sFirstname, sTitle, sLocation);
+				sId, sLastName, sFirstName, sTitle, sLocation);
 	}
 
 	@Override
@@ -50,17 +50,17 @@ public class Staff {
 		if (getClass() != obj.getClass())
 			return false;
 		Staff other = (Staff) obj;
-		if (sFirstname == null) {
-			if (other.sFirstname != null)
+		if (sFirstName == null) {
+			if (other.sFirstName != null)
 				return false;
-		} else if (!sFirstname.equals(other.sFirstname))
+		} else if (!sFirstName.equals(other.sFirstName))
 			return false;
 		if (sId != other.sId)
 			return false;
-		if (sLastname == null) {
-			if (other.sLastname != null)
+		if (sLastName == null) {
+			if (other.sLastName != null)
 				return false;
-		} else if (!sLastname.equals(other.sLastname))
+		} else if (!sLastName.equals(other.sLastName))
 			return false;
 		if (sLocation != other.sLocation)
 			return false;
@@ -81,19 +81,19 @@ public class Staff {
 	}
 
 	public String getsFirstname() {
-		return sFirstname;
+		return sFirstName;
 	}
 
 	public void setsFirstname(String sFirstname) {
-		this.sFirstname = sFirstname;
+		this.sFirstName = sFirstname;
 	}
 
 	public String getsLastname() {
-		return sLastname;
+		return sLastName;
 	}
 
 	public void setsLastname(String sLastname) {
-		this.sLastname = sLastname;
+		this.sLastName = sLastname;
 	}
 
 	public int getsLocation() {
