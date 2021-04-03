@@ -1,51 +1,58 @@
 package com.simpleschedule.daniel.anderson.entities;
 
-
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@Entity(name="patients")
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity(name = "patients")
 public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@Column(name="id", nullable=false, length=4)
+	@Column(name = "id", nullable = false, length = 3)
 	private Integer pId;
-	
-	@Column(name="namef", nullable=false)
+
+	@Column(name = "namef", nullable = false)
 	private String pFirstName;
-	
-	@Column(name="namel", nullable=false)
+
+	@Column(name = "namel", nullable = false)
 	private String pLastName;
-	
-	@Column(name="dob", nullable=false)
+
+	@Column(name = "dob", nullable = false)
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	@Temporal(value = TemporalType.DATE)
 	private Date pDob;
-	
-	@Column(name="primaryid", nullable=true)
+
+	@Column(name = "primaryid", nullable = true, length = 3)
 	private Integer pPrimary;
-	
+
 	public Patient() {
 		super();
 	}
-	
-	public Patient(int pId, String pFirstname, String pLastname, Date pDob, int pPrimary) {
+
+	public Patient(String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
 		super();
-		this.pId = pId;
-		this.pFirstName = pFirstname;
-		this.pLastName = pLastname;
+		this.pFirstName = pFirstName;
+		this.pLastName = pLastName;
 		this.pDob = pDob;
 		this.pPrimary = pPrimary;
 	}
-	
-	@Override
-	public String toString() {
-		return String.format("Patient ID %d: %s %s, DOB: %s ", 
-				this.pId, this.pFirstName, this.pLastName, this.pDob);
-	}	
+
+	public Patient(Integer pId, String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
+		super();
+		this.pId = pId;
+		this.pFirstName = pFirstName;
+		this.pLastName = pLastName;
+		this.pDob = pDob;
+		this.pPrimary = pPrimary;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -78,28 +85,28 @@ public class Patient {
 		return true;
 	}
 
-	public int getpId() {
+	public Integer getpId() {
 		return pId;
 	}
 
-	public void setpId(int pId) {
+	public void setpId(Integer pId) {
 		this.pId = pId;
 	}
 
-	public String getpFirstname() {
+	public String getpFirstName() {
 		return pFirstName;
 	}
 
-	public void setpFirstname(String pFirstname) {
-		this.pFirstName = pFirstname;
+	public void setpFirstName(String pFirstName) {
+		this.pFirstName = pFirstName;
 	}
 
-	public String getpLastname() {
+	public String getpLastName() {
 		return pLastName;
 	}
 
-	public void setpLastname(String pLastname) {
-		this.pLastName = pLastname;
+	public void setpLastName(String pLastName) {
+		this.pLastName = pLastName;
 	}
 
 	public Date getpDob() {
@@ -110,11 +117,11 @@ public class Patient {
 		this.pDob = pDob;
 	}
 
-	public int getpPrimary() {
+	public Integer getpPrimary() {
 		return pPrimary;
 	}
 
-	public void setpPrimary(int pPrimary) {
+	public void setpPrimary(Integer pPrimary) {
 		this.pPrimary = pPrimary;
 	}
 }
