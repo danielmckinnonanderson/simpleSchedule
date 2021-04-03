@@ -1,6 +1,6 @@
 package com.simpleschedule.daniel.anderson.services;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,43 +77,53 @@ public class PatientService {
 	
 	//HIGHER-LEVEL...DISCERNING USER INPUT AND ROUTING TO APPROPRIATE QUERY METHOD
 	public List<Patient> findPatientUsingFields(
-			String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
-		if (pFirstName != null && pLastName != null && pDob != null && pPrimary != null) {
+			Patient patient) {
+		//setup null values from blank fields
+		if (patient.getpFirstName() == "") {
+			patient.setpFirstName(null);
+		}
+		if (patient.getpFirstName() == "") {
+			patient.setpLastName(null);
+		}
+		
+		//parse fields for null values and call appropriate query method
+		if (patient.getpFirstName() != null && patient.getpLastName() != null && patient.getpDob() != null && patient.getpPrimary() != null) {
 			return findByPFirstNameAndPLastNameAndPDobAndPPrimary(
-					pFirstName, pLastName, pDob, pPrimary);
-		} else if (pLastName != null && pDob != null && pPrimary != null) {
+					patient.getpFirstName(), patient.getpLastName(), patient.getpDob(), patient.getpPrimary());
+		} else if (patient.getpLastName() != null && patient.getpDob() != null && patient.getpPrimary() != null) {
 			return findByPLastNameAndPDobAndPPrimary(
-					pLastName, pDob, pPrimary);
-		} else if (pFirstName != null && pDob != null && pPrimary != null) {
+					patient.getpLastName(), patient.getpDob(), patient.getpPrimary());
+		} else if (patient.getpFirstName() != null && patient.getpDob() != null && patient.getpPrimary() != null) {
 			return findByPFirstNameAndPDobAndPPrimary(
-					pFirstName, pDob, pPrimary);
-		} else if (pFirstName != null && pLastName != null && pPrimary != null) {
+					patient.getpFirstName(), patient.getpDob(), patient.getpPrimary());
+		} else if (patient.getpFirstName() != null && patient.getpLastName() != null && patient.getpPrimary() != null) {
 			return findByPFirstNameAndPLastNameAndPPrimary(
-					pFirstName, pLastName, pPrimary);
-		} else if (pFirstName != null && pLastName != null && pDob != null) {
+					patient.getpFirstName(), patient.getpLastName(), patient.getpPrimary());
+		} else if (patient.getpFirstName() != null && patient.getpLastName() != null && patient.getpDob() != null) {
 			return findByPFirstNameAndPLastNameAndPDob(
-					pFirstName, pLastName, pDob);
-		} else if (pFirstName != null && pLastName != null) {
-			return findByPFirstNameAndPLastName(pFirstName, pLastName);
-		} else if (pFirstName != null && pDob != null) {
-			return findByPFirstNameAndPDob(pFirstName, pDob);
-		} else if (pFirstName != null && pPrimary != null) {
-			return findByPFirstNameAndPPrimary(pFirstName, pPrimary);
-		} else if (pLastName != null && pDob != null) {
-			return findByPLastNameAndPDob(pLastName, pDob);
-		} else if (pLastName != null && pPrimary != null) {
-			return findByPLastNameAndPPrimary(pLastName, pPrimary);
-		} else if (pDob != null && pPrimary != null) {
-			return findByPDobAndPPrimary(pDob, pPrimary);
-		} else if (pFirstName != null) {
-			return findByPFirstName(pFirstName);
-		} else if (pLastName != null) {
-			return findByPLastName(pLastName);
-		} else if (pDob != null) {
-			return findByPDob(pDob);
-		} else if (pPrimary != null) {
-			return findByPPrimary(pPrimary);
+					patient.getpFirstName(), patient.getpLastName(), patient.getpDob());
+		} else if (patient.getpFirstName() != null && patient.getpLastName() != null) {
+			return findByPFirstNameAndPLastName(patient.getpFirstName(), patient.getpLastName());
+		} else if (patient.getpFirstName() != null && patient.getpDob() != null) {
+			return findByPFirstNameAndPDob(patient.getpFirstName(), patient.getpDob());
+		} else if (patient.getpFirstName() != null && patient.getpPrimary() != null) {
+			return findByPFirstNameAndPPrimary(patient.getpFirstName(), patient.getpPrimary());
+		} else if (patient.getpLastName() != null && patient.getpDob() != null) {
+			return findByPLastNameAndPDob(patient.getpLastName(), patient.getpDob());
+		} else if (patient.getpLastName() != null && patient.getpPrimary() != null) {
+			return findByPLastNameAndPPrimary(patient.getpLastName(), patient.getpPrimary());
+		} else if (patient.getpDob() != null && patient.getpPrimary() != null) {
+			return findByPDobAndPPrimary(patient.getpDob(), patient.getpPrimary());
+		} else if (patient.getpFirstName() != null) {
+			return findByPFirstName(patient.getpFirstName());
+		} else if (patient.getpLastName() != null) {
+			return findByPLastName(patient.getpLastName());
+		} else if (patient.getpDob() != null) {
+			return findByPDob(patient.getpDob());
+		} else if (patient.getpPrimary() != null) {
+			return findByPPrimary(patient.getpPrimary());
 		} else {
+			System.out.println("No Fields Provided");
 			return null;
 		}
 	}
