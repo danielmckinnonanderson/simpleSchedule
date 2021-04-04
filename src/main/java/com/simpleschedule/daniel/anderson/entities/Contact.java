@@ -27,28 +27,22 @@ public class Contact {
 	public Contact() {
 		super();
 	}
-	
-	public Contact(int cPatientId, long cPhone1) {
-		super();
-		this.cPatientId = cPatientId;
-		this.cPhone1 = cPhone1;
-	}
-	
-	public Contact(int cPatientId, String cEmail) {
+
+	public Contact(Integer cPatientId, String cEmail, Long cPhone1) {
 		super();
 		this.cPatientId = cPatientId;
 		this.cEmail = cEmail;
 	}
 	
 
-	public Contact(int cPatientId, long cPhone1, String cEmail) {
+	public Contact(Integer cPatientId, Long cPhone1, String cEmail) {
 		super();
 		this.cPatientId = cPatientId;
 		this.cPhone1 = cPhone1;
 		this.cEmail = cEmail;
 	}
 
-	public Contact(int cPatientId, long cPhone1, long cPhone2, String cEmail) {
+	public Contact(Integer cPatientId, Long cPhone1, Long cPhone2, String cEmail) {
 		super();
 		this.cPatientId = cPatientId;
 		this.cPhone1 = cPhone1;
@@ -56,7 +50,7 @@ public class Contact {
 		this.cEmail = cEmail;
 	}
 
-	public Contact(int cPatientId, long cPhone1, long cPhone2, long cPhone3, String cEmail) {
+	public Contact(Integer cPatientId, Long cPhone1, Long cPhone2, Long cPhone3, String cEmail) {
 		super();
 		this.cPatientId = cPatientId;
 		this.cPhone1 = cPhone1;
@@ -71,35 +65,35 @@ public class Contact {
 				cPatientId, cPhone1, cPhone2, cPhone3, cEmail);
 	}
 	
-	public int getcPatientId() {
+	public Integer getcPatientId() {
 		return cPatientId;
 	}
 
-	public void setcPatientId(int cPatientId) {
+	public void setcPatientId(Integer cPatientId) {
 		this.cPatientId = cPatientId;
 	}
 
-	public long getcPhone1() {
+	public Long getcPhone1() {
 		return cPhone1;
 	}
 
-	public void setcPhone1(long cPhone1) {
+	public void setcPhone1(Long cPhone1) {
 		this.cPhone1 = cPhone1;
 	}
 
-	public long getcPhone2() {
+	public Long getcPhone2() {
 		return cPhone2;
 	}
 
-	public void setcPhone2(long cPhone2) {
+	public void setcPhone2(Long cPhone2) {
 		this.cPhone2 = cPhone2;
 	}
 
-	public long getcPhone3() {
+	public Long getcPhone3() {
 		return cPhone3;
 	}
 
-	public void setcPhone3(long cPhone3) {
+	public void setcPhone3(Long cPhone3) {
 		this.cPhone3 = cPhone3;
 	}
 
