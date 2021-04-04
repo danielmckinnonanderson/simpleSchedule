@@ -18,11 +18,6 @@ public class NavigationController {
 		return "index";
 	}
 
-	@GetMapping("/patient_add")
-	public String showPatientAdd() {
-		return "patient_add";
-	}
-
 	@GetMapping("/appointment_search")
 	public String showAppointmentSearch() {
 		return "appointment_search";
