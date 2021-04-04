@@ -82,7 +82,7 @@ public class PatientService {
 		if (patient.getpFirstName() == "") {
 			patient.setpFirstName(null);
 		}
-		if (patient.getpFirstName() == "") {
+		if (patient.getpLastName() == "") {
 			patient.setpLastName(null);
 		}
 		
