@@ -1,6 +1,7 @@
 package com.simpleschedule.daniel.anderson.repositories;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -9,23 +10,32 @@ import com.simpleschedule.daniel.anderson.entities.Patient;
 public interface PatientRepository extends CrudRepository<Patient, Integer>{
 	
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
-	public Patient findByPLastName(String pLastName);
+	//ALL POSSIBLE PERMUTATIONS
 	
-	public Patient findByPLastNameAndPFirstName(String pLastName, String pFirstName);
+	List<Patient> findByPFirstName(String pFirstName);
+	List<Patient> findByPFirstNameAndPLastName(String pFirstName, String pLastName);
+	List<Patient> findByPFirstNameAndPDob(String pFirstName, Date pDob);
+	List<Patient> findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary);
 	
-	public Patient findByPLastNameAndPFirstNameAndPDob(
-			String pLastName, String pFirstnName, Date pDob);
+	List<Patient> findByPFirstNameAndPLastNameAndPDob(String pFirstName, String pLastName, Date pDob);
+	List<Patient> findByPFirstNameAndPLastNameAndPPrimary(
+			String pFirstName, String pLastName, Integer pPrimary);
+	List<Patient> findByPFirstNameAndPDobAndPPrimary(String pFirstName, Date pDob, Integer pPrimary);
+		
 	
-	public Patient findByPLastNameAndPFirstNameAndPPrimary(
-			String pLastName, String pFirstName, Integer pPrimary);
+	List<Patient> findByPLastName(String pLastName);
+	List<Patient> findByPLastNameAndPDob(String pLastName, Date pDob);
+	List<Patient> findByPLastNameAndPPrimary(String pLastName, Integer pPrimary);
 	
-	public Patient findByPFirstNameAndPLastNameAndPDobAndPPrimaryId(
-			String pFirstName, String pLastName, Date pDob, Integer pPrimaryId);
+	List<Patient> findByPLastNameAndPDobAndPPrimary(String pLastName, Date pDob, Integer pPrimary);
 	
-	public Patient findByPFirstName(String pFirstName);
+
+	List<Patient> findByPDob(Date pDob);
+	List<Patient> findByPDobAndPPrimary(Date pDob, Integer pPrimary);
 	
-	public Patient findByPDob(Date pDob);
+	List<Patient> findByPPrimary(Integer pPrimary);
 	
-	public Patient findByPPrimary(Integer pPrimary);
-	
+	List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimary(
+			String pFirstName, String pLastName, Date pDob, Integer pPrimary);	
+
 }
