@@ -23,8 +23,9 @@ public class Insurance {
 		super();
 	}
 
-	public Insurance(String iId, String iGroupId, String planId) {
+	public Insurance(Integer iPatientId, String iId, String iGroupId, String planId) {
 		super();
+		this.iPatientId = iPatientId;
 		this.iId = iId;
 		this.iGroupId = iGroupId;
 		this.planId = planId;
