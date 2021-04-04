@@ -1,7 +1,7 @@
 package com.simpleschedule.daniel.anderson.entities;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Date;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,36 +9,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="appointments")
+@Table(name = "appointments")
 public class Appointment {
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer aId;
-	
-	@Column(name="date")
+
+	@Column(name = "date")
+	@Temporal(TemporalType.DATE)
 	private Date aDate;
-	
-	@Column(name="patientId")
+
+	@Column(name = "patientId")
 	private Integer aPatientId;
-	
-	@Column(name="primaryId")
+
+	@Column(name = "primaryId")
 	private Integer aPrimaryId;
-	
-	@Column(name="timeStart")
-	private Time aTimeStart;
-	
-	@Column(name="timeEnd")
-	private Time aTimeEnd;
-	
+
+	@Column(name = "timeStart")
+	private LocalTime aTimeStart;
+
+	@Column(name = "timeEnd")
+	private LocalTime aTimeEnd;
+
 	public Appointment() {
 		super();
 	}
 
-	public Appointment(Integer aId, Date aDate, Integer aPatientId, Integer aPrimaryId, Time aTimeStart,
-			Time aTimeEnd) {
+	public Appointment(Integer aId, Date aDate, Integer aPatientId, Integer aPrimaryId, LocalTime aTimeStart,
+			LocalTime aTimeEnd) {
 		super();
 		this.aId = aId;
 		this.aDate = aDate;
@@ -122,19 +125,19 @@ public class Appointment {
 		this.aPrimaryId = aPrimaryId;
 	}
 
-	public Time getaTimeStart() {
+	public LocalTime getaTimeStart() {
 		return aTimeStart;
 	}
 
-	public void setaTimeStart(Time aTimeStart) {
+	public void setaTimeStart(LocalTime aTimeStart) {
 		this.aTimeStart = aTimeStart;
 	}
 
-	public Time getaTimeEnd() {
+	public LocalTime getaTimeEnd() {
 		return aTimeEnd;
 	}
 
-	public void setaTimeEnd(Time aTimeEnd) {
+	public void setaTimeEnd(LocalTime aTimeEnd) {
 		this.aTimeEnd = aTimeEnd;
 	}
 }
