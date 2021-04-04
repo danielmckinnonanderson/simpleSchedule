@@ -49,7 +49,7 @@
 							<!-- dynamic code below, implement later -->
 								<option value=""> Select </option>
 								<c:forEach items="${doctorList}" var="doctor">
-									<option value="${doctor.getsId()}">Dr. ${doctor.getsLastName()}</option>
+									<option value="${doctor.getsId()}">${doctor.getsLastName()}</option>
 								</c:forEach>
 							</form:select>	
 							<p><form:errors path="pPrimary"/></p>							
