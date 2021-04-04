@@ -183,10 +183,29 @@ text: primary #ffffff, body #917640, footer #719950
 	font-family: 'Comfortaa';
 	color: #917640;
 }
-
-
 /* end patient_search.html */
 
+
+/* SEARCH_RESULTS.HTML STYLING */
+#results_table {
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+#results_header {
+	color: white;
+	background-color: #2f451d;
+}
+#results_body {
+	border: 1px solid #ededca;
+}
+tr {
+	border: 1px solid e0b765;
+}
+tr:nth-child(even) {
+	background-color: #ededca;
+}
+/* end search_results.html styling	*/
 
 
 
