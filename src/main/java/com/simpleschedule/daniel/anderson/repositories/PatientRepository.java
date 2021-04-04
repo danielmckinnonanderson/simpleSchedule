@@ -37,5 +37,4 @@ public interface PatientRepository extends CrudRepository<Patient, Integer>{
 	
 	List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimary(
 			String pFirstName, String pLastName, Date pDob, Integer pPrimary);	
-
 }
