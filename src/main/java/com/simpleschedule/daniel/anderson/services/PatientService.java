@@ -127,4 +127,9 @@ public class PatientService {
 			return null;
 		}
 	}
+	
+	//SAVE NEW PATIENT
+	public Patient saveNewPatient(Patient patient) {
+		return patientRepository.save(patient);
+	}
 }
