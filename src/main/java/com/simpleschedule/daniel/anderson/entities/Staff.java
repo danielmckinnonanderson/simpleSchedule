@@ -26,11 +26,11 @@ public class Staff {
 		super();
 	}
 
-	public Staff(int sId, String sFirstname, String sLastname, int sLocation, String sTitle) {
+	public Staff(Integer sId, String sFirstName, String sLastName, Integer sLocation, String sTitle) {
 		super();
 		this.sId = sId;
-		this.sFirstName = sFirstname;
-		this.sLastName = sLastname;
+		this.sFirstName = sFirstName;
+		this.sLastName = sLastName;
 		this.sLocation = sLocation;
 		this.sTitle = sTitle;
 	}
@@ -76,31 +76,31 @@ public class Staff {
 		return sId;
 	}
 
-	public void setsId(int sId) {
+	public void setsId(Integer sId) {
 		this.sId = sId;
 	}
 
-	public String getsFirstname() {
+	public String getsFirstName() {
 		return sFirstName;
 	}
 
-	public void setsFirstname(String sFirstname) {
-		this.sFirstName = sFirstname;
+	public void setsFirstName(String sFirstName) {
+		this.sFirstName = sFirstName;
 	}
 
-	public String getsLastname() {
+	public String getsLastName() {
 		return sLastName;
 	}
 
-	public void setsLastname(String sLastname) {
-		this.sLastName = sLastname;
+	public void setsLastName(String sLastName) {
+		this.sLastName = sLastName;
 	}
 
 	public int getsLocation() {
 		return sLocation;
 	}
 
-	public void setsLocation(int sLocation) {
+	public void setsLocation(Integer sLocation) {
 		this.sLocation = sLocation;
 	}
 
