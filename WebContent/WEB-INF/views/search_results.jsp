@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,24 +24,27 @@
 			<div class="container_field">
 
 				<h1>results:</h1>
-				<table>
-					<tr>
-						<th><p>First Name</p></th>
-						<th><p>Last Name</p></th>
-						<th><p>D.O.B.</p></th>
-						<th><p>Primary Care</p></th>
-						<th><p>Details</p></th>
-					</tr>
-					
-					<c:forEach var="patient" items="${resultsList}">
+				<table id='results_table'>
+					<thead id='results_header'>
 						<tr>
-							<td><p><c:out value="${patient.pFirstName}"/></p></td>
-							<td><p><c:out value="${patient.pLastName}"/></p></td>
-							<td><p><c:out value="${patient.pDob}"/></p></td>
-							<td><p><c:out value="${patient.pPrimary}"/></p></td>
-							<td><p><a href=#>View More</a></p></td>
+							<th><p>First Name</p></th>
+							<th><p>Last Name</p></th>
+							<th><p>D.O.B.</p></th>
+							<th><p>Primary Care</p></th>
+							<th><p>Details</p></th>
 						</tr>
-					</c:forEach>
+					</thead>
+					<tbody id='results_body'>
+						<c:forEach var="patient" items="${resultsList}">
+							<tr>
+								<td><p><c:out value="${patient.pFirstName}" /></p></td>
+								<td><p><c:out value="${patient.pLastName}" /></p></td>
+								<td><p><fmt:formatDate value="${patient.pDob}" type="date" pattern="MM-dd-YYYY" /></p></td>
+								<td><p><c:out value="${patient.pPrimary}" /></p></td>
+								<td><p><a href=#>View More</a></p></td>
+							</tr>
+						</c:forEach>
+					</tbody>
 				</table>
 			</div>
 		</section>
