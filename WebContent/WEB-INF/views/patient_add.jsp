@@ -119,7 +119,7 @@
 							<div class="form_row">
 								<h4 style="color: red;">*</h4>
 								<h4>Email:</h4>
-								<form:input  class="form_input_large" path="cEmail" type="text" 
+								<form:input  class="form_input_large" path="cEmail" type="email" 
 									placeholder="johndoe@example.com"/>
 								<p>
 									<form:errors path="cEmail" />
