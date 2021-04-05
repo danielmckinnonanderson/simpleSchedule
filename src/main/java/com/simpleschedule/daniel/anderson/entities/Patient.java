@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,13 +22,16 @@ public class Patient {
 	private Integer pId;
 
 	@Column(name = "namef", nullable = false)
+	@NotEmpty
 	private String pFirstName;
 
 	@Column(name = "namel", nullable = false)
+	@NotEmpty
 	private String pLastName;
 
 	@Column(name = "dob", nullable = false)
 	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	@Past
 	@Temporal(value = TemporalType.DATE)
 	private Date pDob;
 
@@ -52,6 +57,12 @@ public class Patient {
 		this.pLastName = pLastName;
 		this.pDob = pDob;
 		this.pPrimary = pPrimary;
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [pId=" + pId + ", pFirstName=" + pFirstName + ", pLastName=" + pLastName + ", pDob=" + pDob
+				+ ", pPrimary=" + pPrimary + "]";
 	}
 
 	@Override

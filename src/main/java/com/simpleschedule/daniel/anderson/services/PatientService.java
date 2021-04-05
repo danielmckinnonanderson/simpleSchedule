@@ -18,6 +18,11 @@ public class PatientService {
 		this.patientRepository = patientRepository;
 	}
 	
+	//SINGLE FINDER METHOD FOR ID
+	public Patient findByPId(Integer pId) {
+		return patientRepository.findByPId(pId);
+	}
+	
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
 	private List<Patient> findByPFirstName(String pFirstName) {
 		return patientRepository.findByPFirstName(pFirstName);
@@ -126,5 +131,10 @@ public class PatientService {
 			System.out.println("No Fields Provided");
 			return null;
 		}
+	}
+	
+	//SAVE NEW PATIENT
+	public Patient saveNewPatient(Patient patient) {
+		return patientRepository.save(patient);
 	}
 }

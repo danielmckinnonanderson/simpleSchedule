@@ -1,3 +1,4 @@
+
 package com.simpleschedule.daniel.anderson.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class ContactService {
 	//SAVE NEW CONTACT
 	public Contact saveNewContact(Contact contact) {
 		return contactRepository.save(contact);
+	}
+	
+	//FIND CONTACT BY cPatientId
+	public Contact findContactBycPatientId(Integer cPatientId) {
+		return contactRepository.findByCPatientId(cPatientId);
 	}
 }

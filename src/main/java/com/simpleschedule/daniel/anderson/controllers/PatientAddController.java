@@ -1,3 +1,4 @@
+
 package com.simpleschedule.daniel.anderson.controllers;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public class PatientAddController {
 			return "patient_add";
 		}
 		System.out.println("BEFORE SAVE: " + newPatient);
-
+		newPatient = patientService.saveNewPatient(newPatient);
 		System.out.println("POST SAVE: " + newPatient);
 		
 		System.out.println("CONTACT " + newContact);

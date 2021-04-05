@@ -8,10 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 import com.simpleschedule.daniel.anderson.entities.Patient;
 
 public interface PatientRepository extends CrudRepository<Patient, Integer>{
+	//FIND SINGLE PATIENT BY ID
+	Patient findByPId(Integer pId);
+	
 	
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
-	//ALL POSSIBLE PERMUTATIONS
-	
 	List<Patient> findByPFirstName(String pFirstName);
 	List<Patient> findByPFirstNameAndPLastName(String pFirstName, String pLastName);
 	List<Patient> findByPFirstNameAndPDob(String pFirstName, Date pDob);
@@ -37,5 +38,4 @@ public interface PatientRepository extends CrudRepository<Patient, Integer>{
 	
 	List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimary(
 			String pFirstName, String pLastName, Date pDob, Integer pPrimary);	
-
 }

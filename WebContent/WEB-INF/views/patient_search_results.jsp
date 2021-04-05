@@ -24,6 +24,7 @@
 			<div class="container_field">
 
 				<h1>results:</h1>
+				
 				<table id='results_table'>
 					<thead id='results_header'>
 						<tr>
@@ -36,13 +37,16 @@
 					</thead>
 					<tbody id='results_body'>
 						<c:forEach var="patient" items="${resultsList}">
-							<tr>
-								<td><p><c:out value="${patient.pFirstName}" /></p></td>
-								<td><p><c:out value="${patient.pLastName}" /></p></td>
-								<td><p><fmt:formatDate value="${patient.pDob}" type="date" pattern="MM-dd-YYYY" /></p></td>
-								<td><p><c:out value="${patient.pPrimary}" /></p></td>
-								<td><p><a href=#>View More</a></p></td>
-							</tr>
+							<form:form action="./patient_search_results" method="post">
+								<tr>
+									<td><p><c:out value="${patient.pFirstName}" /></p></td>
+									<td><p><c:out value="${patient.pLastName}" /></p></td>
+									<td><p><fmt:formatDate value="${patient.pDob}" type="date" pattern="MM-dd-YYYY" /></p></td>
+									<td><p><c:out value="${doctorList.get(patient.pPrimary-1).sLastName}" /></p></td>
+									<input type=hidden name="viewId" value="${patient.pId}"/>
+									<td><input type="submit" value="View Details"/></td>
+								</tr>
+							</form:form>
 						</c:forEach>
 					</tbody>
 				</table>

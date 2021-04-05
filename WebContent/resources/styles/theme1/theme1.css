@@ -171,7 +171,7 @@ text: primary #ffffff, body #917640, footer #719950
 }
 #form_dropdown {
 	width: 120px;
-	height: 38px;
+	height: 26px;
 }
 .form_row {
 	display: flex;
@@ -184,6 +184,21 @@ text: primary #ffffff, body #917640, footer #719950
 	color: #917640;
 }
 /* end patient_search.html */
+
+
+/* PATIENT_ADD.HTML STYLING*/
+#provider_select {
+	height: 26px;
+	margin-right: 28px;
+}
+#form_email {
+	width: 70%;
+}
+#form_add {
+	width: 90px;
+	height: 48px;
+}
+/* end patient_add.html*/
 
 
 /* SEARCH_RESULTS.HTML STYLING */
