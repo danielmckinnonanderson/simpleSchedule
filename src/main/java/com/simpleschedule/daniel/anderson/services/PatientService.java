@@ -18,6 +18,11 @@ public class PatientService {
 		this.patientRepository = patientRepository;
 	}
 	
+	//SINGLE FINDER METHOD FOR ID
+	public Patient findByPId(Integer pId) {
+		return patientRepository.findByPId(pId);
+	}
+	
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
 	private List<Patient> findByPFirstName(String pFirstName) {
 		return patientRepository.findByPFirstName(pFirstName);
