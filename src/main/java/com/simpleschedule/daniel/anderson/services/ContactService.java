@@ -20,4 +20,9 @@ public class ContactService {
 	public Contact saveNewContact(Contact contact) {
 		return contactRepository.save(contact);
 	}
+	
+	//FIND CONTACT BY cPatientId
+	public Contact findContactBycPatientId(Integer cPatientId) {
+		return contactRepository.findByCPatientId(cPatientId);
+	}
 }
