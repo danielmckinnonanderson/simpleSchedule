@@ -15,6 +15,11 @@ public class InsuranceService {
 		this.insuranceRepository = insuranceRepository;
 	}
 	
+	//FIND BY iPatientId
+	public Insurance findByiPatientId(Integer iPatientId) {
+		return insuranceRepository.findByiPatientId(iPatientId);
+	}
+	
 	//SAVE NEW INSURANCE
 	public Insurance saveNewInsurance(Insurance insurance) {
 		return insuranceRepository.save(insurance);
