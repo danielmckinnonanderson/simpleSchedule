@@ -30,8 +30,7 @@ public class Patient {
 	private String pLastName;
 
 	@Column(name = "dob", nullable = false)
-	@DateTimeFormat(pattern = "YYYY-MM-DD")
-	@Past
+	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")
 	@Temporal(value = TemporalType.DATE)
 	private Date pDob;
 
