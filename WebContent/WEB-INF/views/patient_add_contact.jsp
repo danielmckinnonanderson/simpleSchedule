@@ -26,48 +26,34 @@
 					<h5>*starred fields are required*</h5>
 				</div>
 				<div>
-					<h3>Patient Information</h3>
-					<form:form action="./patient_add" method="post"
-						modelAttribute="newPatient">
+					<h3>Contact Information</h3>
+					<form:form action="./patient_add_contact" method="post"
+						modelAttribute="newContact">
 						<div class="form_row">
 							<h4 style="color: red;">*</h4>
-							<h4>First name:</h4>
-							<form:input path="pFirstName" type="text"
-								class="form_input_large" placeholder="Patient first name" />
+							<h4>Email:</h4>
+							<form:input class="form_input_large" path="cEmail" type="email"
+								placeholder="johndoe@example.com" />
 							<p>
-								<form:errors path="pFirstName" />
+								<form:errors path="cEmail" />
 							</p>
 						</div>
 						<div class="form_row">
 							<h4 style="color: red;">*</h4>
-							<h4>Last name:</h4>
-							<form:input path="pLastName" type="text" class="form_input_large"
-								placeholder="Patient last name" />
-							<p>
-								<form:errors path="pLastName" />
-							</p>
+							<h4>Primary Phone:</h4>
+							<form:input class="form_input_large" path="cPhone1" type="text"
+								placeholder="5559990000" />
 						</div>
 						<div class="form_row">
-							<h4 style="color: red;">*</h4>
-							<h4>Birth Date:</h4>
-							<form:input path="pDob" type="date" name="dob" id="form_dob" />
-							<p>
-								<form:errors path="pDob" />
-							</p>
-
-							<h4>Primary Doctor:</h4>
-							<form:select path="pPrimary">
-								<option value="">Select</option>
-								<c:forEach items="${doctorList}" var="doctor">
-									<option value="${doctor.sId}">${doctor.sLastName}</option>
-								</c:forEach>
-							</form:select>
-							<p>
-								<form:errors path="pPrimary" />
-							</p>
+							<h4>Phone 2:</h4>
+							<form:input class="form_input_large" path="cPhone2" type="text"
+								placeholder="5559990000" />
+							<h4>Phone 3:</h4>
+							<form:input class="form_input_large" path="cPhone3" type="text"
+								placeholder="5559990000" />
 						</div>
 						<div class="form_row" style="justify-content: center;">
-							<input type="submit" value="Next: Insurance Info" id="form_add">
+							<input type="submit" value="Submit New Patient" id="form_add">
 						</div>
 					</form:form>
 				</div>
