@@ -154,6 +154,16 @@ text: primary #ffffff, body #917640, footer #719950
 #form_dob {
 	font-family: 'Comfortaa', 'Arial', sans-serif;
 }
+#form_errorbox {
+	justify-content: center;
+	padding: 10px;
+	border: solid black 1px;
+	border-radius: 25px;
+	box-shadow: #c9c9b3 2px 2px 4px 2px;
+	background-color: white;
+	color: red;
+}
+
 .form_input_large {
 	font-family: Arial;
 	margin: 10px 5px 10px 5px;

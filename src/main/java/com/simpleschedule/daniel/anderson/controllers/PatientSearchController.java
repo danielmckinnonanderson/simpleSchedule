@@ -55,7 +55,9 @@ public class PatientSearchController {
 			@ModelAttribute("searchPatient") Patient searchPatient,
 			BindingResult result,
 			Model model) {
+		model.addAttribute("hasErrors", result.hasErrors());
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "patient_search";
 		}
 		List<Patient> resultsList = patientService.findPatientUsingFields(searchPatient);
@@ -84,7 +86,7 @@ public class PatientSearchController {
 			model.addAttribute("viewPatient", viewPatient);
 			model.addAttribute("viewContact", contactService.findContactBycPatientId(viewId));
 			model.addAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
-			//TO DO: add location service to retrieve prefferred location for this patient
+			//TO DO: add location service to retrieve preferred location for this patient
 			//TO DO: add appointment service to retrieve appointments for this patient
 			return "patient_details";
 		}

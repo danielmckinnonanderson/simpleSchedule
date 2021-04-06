@@ -30,19 +30,16 @@
 						<div class="form_row">
 							<h4>First name:</h4>
 							<form:input path="pFirstName" type="text"
-								class="form_input_large" placeholder="Patient first name" />
-								<p><form:errors path="pFirstName"/></p>
+								class="form_input_large" placeholder="Patient first name" />								
 						</div>
 						<div class="form_row">
 							<h4>Last name:</h4>
 							<form:input path="pLastName" type="text" class="form_input_large"
-								placeholder="Patient last name" />
-								<p><form:errors path="pLastName"/></p>
+								placeholder="Patient last name" />							
 						</div>
 						<div class="form_row">
 							<h4>Birth Date:</h4>
-							<form:input path="pDob" type="date" name="dob" id="form_dob" />
-								<p><form:errors path="pDob"/></p>
+							<form:input path="pDob" type="date" name="dob" id="form_dob" />								
 								
 							<h4>Primary Doctor:</h4>
 							<form:select path="pPrimary">
@@ -51,9 +48,16 @@
 								<c:forEach items="${doctorList}" var="doctor">
 									<option value="${doctor.getsId()}">${doctor.getsLastName()}</option>
 								</c:forEach>
-							</form:select>	
-							<p><form:errors path="pPrimary"/></p>							
+							</form:select>														
 						</div>
+						<c:if test ="${hasErrors}">
+						<div id="form_errorbox">
+							<p><form:errors path="pFirstName"/></p>
+							<p><form:errors path="pLastName"/></p>
+							<p><form:errors path="pDob"/></p>
+							<p><form:errors path="pPrimary"/></p>
+						</div>
+						</c:if>
 						<div class="form_row" style="justify-content: center;">
 							<input type="submit" value="Search" id="form_submit">
 						</div>

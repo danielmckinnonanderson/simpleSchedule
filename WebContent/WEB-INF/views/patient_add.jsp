@@ -60,13 +60,14 @@
 								<form:select path="pPrimary">
 									<option value="">Select</option>
 									<c:forEach items="${doctorList}" var="doctor">
-										<option value="${doctor.getsId()}">${doctor.getsLastName()}</option>
+										<option value="${doctor.sId}">${doctor.sLastName}</option>
 									</c:forEach>
 								</form:select>
 								<p>
 									<form:errors path="pPrimary" />
 								</p>
 							</div>
+
 						</form:form>
 					</div>
 					<div>
@@ -119,8 +120,8 @@
 							<div class="form_row">
 								<h4 style="color: red;">*</h4>
 								<h4>Email:</h4>
-								<form:input  class="form_input_large" path="cEmail" type="email" 
-									placeholder="johndoe@example.com"/>
+								<form:input class="form_input_large" path="cEmail" type="email"
+									placeholder="johndoe@example.com" />
 								<p>
 									<form:errors path="cEmail" />
 								</p>
@@ -128,18 +129,17 @@
 							<div class="form_row">
 								<h4 style="color: red;">*</h4>
 								<h4>Primary Phone:</h4>
-								<form:input class="form_input_large" path="cPhone1" 
-									type="text" placeholder="5559990000"/>
+								<form:input class="form_input_large" path="cPhone1" type="text"
+									placeholder="5559990000" />
 							</div>
 							<div class="form_row">
 								<h4>Phone 2:</h4>
-								<form:input class="form_input_large" path="cPhone2" 
-									type="text" placeholder="5559990000"/>
+								<form:input class="form_input_large" path="cPhone2" type="text"
+									placeholder="5559990000" />
 								<h4>Phone 3:</h4>
-								<form:input class="form_input_large" path="cPhone3" 
-									type="text" placeholder="5559990000"/>
+								<form:input class="form_input_large" path="cPhone3" type="text"
+									placeholder="5559990000" />
 							</div>
-
 							<div class="form_row" style="justify-content: center;">
 								<input type="submit" value="Add New Patient" id="form_add">
 							</div>

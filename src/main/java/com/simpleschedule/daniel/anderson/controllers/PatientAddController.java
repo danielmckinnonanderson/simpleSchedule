@@ -45,6 +45,7 @@ public class PatientAddController {
 			List<Staff> doctorList = staffService.findAllDoctors();
 			session.setAttribute("doctorList", doctorList);
 		}
+		System.out.println("---> @GetMapping(/patient_add)");
 		model.addAttribute("newPatient", new Patient());
 		model.addAttribute("newInsurance", new Insurance());
 		model.addAttribute("newContact", new Contact());
@@ -53,14 +54,16 @@ public class PatientAddController {
 	
 	@PostMapping("/patient_add")
 	public String processNewPatient(
-			@Valid @ModelAttribute("newPatient") Patient newPatient,
-			@Valid @ModelAttribute("newInsurance") Insurance newInsurance,
-			@Valid @ModelAttribute("newContact") Contact newContact,
+			@ModelAttribute("newPatient") Patient newPatient,
+			@ModelAttribute("newInsurance") Insurance newInsurance,
+			@ModelAttribute("newContact") Contact newContact,
+			HttpSession session,
 			BindingResult result,
 			Model model) { 
 		if (result.hasErrors()) {
 			return "patient_add";
 		}
+		System.out.println("---> @PostMapping(/patient_add)");
 		System.out.println("BEFORE SAVE: " + newPatient);
 		newPatient = patientService.saveNewPatient(newPatient);
 		System.out.println("POST SAVE: " + newPatient);
@@ -73,7 +76,12 @@ public class PatientAddController {
 		newInsurance.setiPatientId(newPatient.getpId());
 		insuranceService.saveNewInsurance(newInsurance);
 		
-		return "index";
+		//set model attributes for patient_details view
+		model.addAttribute("viewPatient", newPatient);
+		model.addAttribute("viewContact", newContact);
+		model.addAttribute("viewInsurance", newContact);
+		
+		return "patient_details";
 	}
 
 }
