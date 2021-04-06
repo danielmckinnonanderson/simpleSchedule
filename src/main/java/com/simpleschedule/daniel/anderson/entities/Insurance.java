@@ -33,7 +33,7 @@ public class Insurance {
 
 	@Override
 	public String toString() {
-		return String.format("Insurance for Patient ID%d: ID: %d, GroupID: %d, PlanID: %d, Provider: %s",
+		return String.format("Insurance for Patient ID%s: ID: %s, GroupID: %s, PlanID: %s, Provider: %s",
 				iPatientId, iId, iGroupId, iPlanId, iProvider);
 	}
 	
