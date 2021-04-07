@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Search for an appointment • simpleSchedule</title>
+<title>Add an appointment • simpleSchedule</title>
 	<spring:url value=".//resources/styles/theme1/theme1.css" var="theme1CSS"/>
 	<link href="${theme1CSS}" rel="stylesheet"/>
 </head>
