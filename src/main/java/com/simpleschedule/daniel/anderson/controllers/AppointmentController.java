@@ -1,8 +1,11 @@
 package com.simpleschedule.daniel.anderson.controllers;
 
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,25 +43,23 @@ public class AppointmentController {
 	}
 	
 	@PostMapping("/appointment_add")
-	public String processNewAppointment(@ModelAttribute("newAppointment") Appointment newAppointment,
+	public String processNewAppointment(
+			@ModelAttribute("newAppointment") Appointment newAppointment,
 			BindingResult result,
 			@SessionAttribute("viewPatient") Patient viewPatient,
 			@SessionAttribute(required=true, name="locationMap") HashMap<Integer, Location> locationMap,
+			HttpSession session,
 			Model model) {
 		model.addAttribute("hasErrors", result.hasErrors());
-		System.out.println("appointment: " + newAppointment);
 		if (result.hasErrors()) {
 			System.out.println("Has Errors: " + result.hasErrors());
 			return "/appointment_add";
 		}
-		System.out.println(newAppointment);
-		//add viewPatient.pId to newAppointment
-		newAppointment.setaPatientId(viewPatient.getpId());
-		
 		//persist newAppointment to the database
-		appointmentService.saveAppointment(newAppointment);
+		Appointment savedAppointment = appointmentService.saveAppointment(newAppointment);
+		System.out.println(savedAppointment);
 		
-		model.addAttribute("appointmentList", appointmentService.findByAPatientId(viewPatient.getpId()));
-		return "redirect:patient_details";
+		session.setAttribute("appointmentList", appointmentService.findByAPatientId(viewPatient.getpId()));
+		return "patient_details";
 	}
 }
