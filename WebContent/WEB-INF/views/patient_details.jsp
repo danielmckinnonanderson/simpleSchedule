@@ -22,8 +22,13 @@
 		<!-- PAGE BODY -->
 		<section id='container_body'>
 			<div class="container_field">
-
+				<h3>patient details</h3>
 				<h1><c:out value="${viewPatient.pFirstName} ${viewPatient.pLastName}"/></h1>
+				<div class="form_row">
+					<h5><a href="./appointment_add">Schedule Appointment</a></h5>
+					<h5><a href=#>Update Information</a></h5>
+					<h5><a href=#>Delete Patient</a></h5>
+				</div>
 				<div>
 					<h3>patient info</h3>
 					<ul>
@@ -52,14 +57,21 @@
 						<tr>
 							<th><p>Date</p></th>
 							<th><p>Start Time</p></th>
-							<th><p>End Time</p></th>
 							<th><p>Location</p></th>
 							<th><p>Provider</p></th>
 							<th><p>Modify</p></th>
 						</tr>
 					</thead>
 					<tbody id='results_body'>
-						<!-- IMPLEMENT APPOINTMENT TABLE LATER -->
+						<c:forEach items="${appointmentList}" var="appointment">
+							<tr>
+								<td><p><c:out value="${appointment.aDate}"/></p></td>
+								<td><p><c:out value="${appointment.aTimeStart}"/></p></td>
+								<td><p><c:out value="${locationMap.get(appointment.aLocationId)}"/></p></td>
+								<td><p><c:out value="${appointment.aPrimaryId}"/></p></td>
+								<td><p> button </p></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				</div>

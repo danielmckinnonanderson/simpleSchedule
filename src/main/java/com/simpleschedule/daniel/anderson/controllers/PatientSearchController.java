@@ -18,6 +18,7 @@ import com.simpleschedule.daniel.anderson.entities.Insurance;
 import com.simpleschedule.daniel.anderson.entities.Patient;
 import com.simpleschedule.daniel.anderson.entities.Staff;
 import com.simpleschedule.daniel.anderson.exceptions.EntityNotFoundException;
+import com.simpleschedule.daniel.anderson.services.AppointmentService;
 import com.simpleschedule.daniel.anderson.services.ContactService;
 import com.simpleschedule.daniel.anderson.services.InsuranceService;
 import com.simpleschedule.daniel.anderson.services.PatientService;
@@ -25,14 +26,16 @@ import com.simpleschedule.daniel.anderson.services.StaffService;
 
 @Controller
 public class PatientSearchController {
+	private AppointmentService appointmentService;
 	private ContactService contactService;
 	private InsuranceService insuranceService;
 	private PatientService patientService;
 	private StaffService staffService;
 	
 	@Autowired
-	public PatientSearchController(PatientService patientService, StaffService staffService,
+	public PatientSearchController(AppointmentService appointmentService, PatientService patientService, StaffService staffService,
 			ContactService contactService, InsuranceService insuranceService) {
+		this.appointmentService = appointmentService;
 		this.contactService = contactService;
 		this.insuranceService = insuranceService;
 		this.patientService = patientService;
@@ -83,11 +86,11 @@ public class PatientSearchController {
 			return "index";
 		} else {
 
-			model.addAttribute("viewPatient", viewPatient);
+			session.setAttribute("viewPatient", viewPatient);
 			model.addAttribute("viewContact", contactService.findContactBycPatientId(viewId));
 			model.addAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
 			//TO DO: add location service to retrieve preferred location for this patient
-			//TO DO: add appointment service to retrieve appointments for this patient
+			session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewId));
 			return "patient_details";
 		}
 	}

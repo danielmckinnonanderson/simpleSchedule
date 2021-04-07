@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "appointments")
 public class Appointment {
@@ -21,8 +24,12 @@ public class Appointment {
 	private Integer aId;
 
 	@Column(name = "date")
-	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=DateTimeFormat.ISO.DATE, pattern="yyyy-MM-dd")
+	@Temporal(value = TemporalType.DATE)
 	private Date aDate;
+	
+	@Column(name = "locationId")
+	private Integer aLocationId;
 
 	@Column(name = "patientId")
 	private Integer aPatientId;
@@ -31,24 +38,47 @@ public class Appointment {
 	private Integer aPrimaryId;
 
 	@Column(name = "timeStart")
-	private LocalTime aTimeStart;
+	@DateTimeFormat(pattern="HH:mm")
+	@Temporal(value = TemporalType.TIME)
+	private Date aTimeStart;
 
 	@Column(name = "timeEnd")
-	private LocalTime aTimeEnd;
+	@DateTimeFormat(pattern="HH:mm")
+	@Temporal(value = TemporalType.TIME)
+	private Date aTimeEnd;
 
 	public Appointment() {
 		super();
 	}
 
-	public Appointment(Integer aId, Date aDate, Integer aPatientId, Integer aPrimaryId, LocalTime aTimeStart,
-			LocalTime aTimeEnd) {
+	public Appointment(Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, Date aTimeStart,
+			Date aTimeEnd) {
 		super();
-		this.aId = aId;
 		this.aDate = aDate;
+		this.aLocationId = aLocationId;
 		this.aPatientId = aPatientId;
 		this.aPrimaryId = aPrimaryId;
 		this.aTimeStart = aTimeStart;
 		this.aTimeEnd = aTimeEnd;
+	}
+	
+	public Appointment(Integer aId, Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, Date aTimeStart,
+			Date aTimeEnd) {
+		super();
+		this.aId = aId;
+		this.aDate = aDate;
+		this.aLocationId = aLocationId;
+		this.aPatientId = aPatientId;
+		this.aPrimaryId = aPrimaryId;
+		this.aTimeStart = aTimeStart;
+		this.aTimeEnd = aTimeEnd;
+	}
+	
+	@Override
+	public String toString() {
+		return "Appointment [aId=" + aId + ", aDate=" + aDate + ", aLocationId=" + aLocationId + ", aPatientId="
+				+ aPatientId + ", aPrimaryId=" + aPrimaryId + ", aTimeStart=" + aTimeStart + ", aTimeEnd=" + aTimeEnd
+				+ "]";
 	}
 
 	@Override
@@ -69,6 +99,11 @@ public class Appointment {
 			if (other.aId != null)
 				return false;
 		} else if (!aId.equals(other.aId))
+			return false;
+		if (aLocationId == null) {
+			if (other.aLocationId != null)
+				return false;
+		} else if (!aLocationId.equals(other.aLocationId))
 			return false;
 		if (aPatientId == null) {
 			if (other.aPatientId != null)
@@ -108,6 +143,14 @@ public class Appointment {
 	public void setaDate(Date aDate) {
 		this.aDate = aDate;
 	}
+	
+	public Integer getaLocationId() {
+		return aLocationId;
+	}
+	
+	public void setaLocationId(Integer aLocationId) {
+		this.aLocationId = aLocationId;
+	}
 
 	public Integer getaPatientId() {
 		return aPatientId;
@@ -125,19 +168,19 @@ public class Appointment {
 		this.aPrimaryId = aPrimaryId;
 	}
 
-	public LocalTime getaTimeStart() {
+	public Date getaTimeStart() {
 		return aTimeStart;
 	}
 
-	public void setaTimeStart(LocalTime aTimeStart) {
+	public void setaTimeStart(Date aTimeStart) {
 		this.aTimeStart = aTimeStart;
 	}
 
-	public LocalTime getaTimeEnd() {
+	public Date getaTimeEnd() {
 		return aTimeEnd;
 	}
 
-	public void setaTimeEnd(LocalTime aTimeEnd) {
+	public void setaTimeEnd(Date aTimeEnd) {
 		this.aTimeEnd = aTimeEnd;
 	}
 }
