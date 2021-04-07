@@ -1,6 +1,8 @@
 package com.simpleschedule.daniel.anderson.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,9 +33,9 @@ public class NavigationController {
 			List<Staff> doctorList = staffService.findAllDoctors();
 			session.setAttribute("doctorList", doctorList);
 		}
-		if (session.getAttribute("locationList") == null) {
-			Iterable<Location> locationList = locationService.getAll();
-			session.setAttribute("locationList", locationList);
+		if (session.getAttribute("locationMap") == null) {
+			HashMap<Integer, Location> locationMap = locationService.getAll();
+			session.setAttribute("locationMap", locationMap);
 		}
 		return "index";
 	}
