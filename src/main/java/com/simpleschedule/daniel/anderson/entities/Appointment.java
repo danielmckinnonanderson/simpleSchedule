@@ -1,7 +1,7 @@
 package com.simpleschedule.daniel.anderson.entities;
 
-import java.time.LocalDateTime;
 import java.util.Date;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,19 +38,32 @@ public class Appointment {
 	private Integer aPrimaryId;
 
 	@Column(name = "timeStart")
-//	@DateTimeFormat(iso=DateTimeFormat.ISO.TIME, pattern="hh:mm:ss a")
-	private LocalDateTime aTimeStart;
+	@DateTimeFormat(pattern="HH:mm")
+	@Temporal(value = TemporalType.TIME)
+	private Date aTimeStart;
 
 	@Column(name = "timeEnd")
-//	@DateTimeFormat(iso=DateTimeFormat.ISO.TIME, pattern="hh:mm:ss a")
-	private LocalDateTime aTimeEnd;
+	@DateTimeFormat(pattern="HH:mm")
+	@Temporal(value = TemporalType.TIME)
+	private Date aTimeEnd;
 
 	public Appointment() {
 		super();
 	}
 
-	public Appointment(Integer aId, Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, LocalDateTime aTimeStart,
-			LocalDateTime aTimeEnd) {
+	public Appointment(Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, Date aTimeStart,
+			Date aTimeEnd) {
+		super();
+		this.aDate = aDate;
+		this.aLocationId = aLocationId;
+		this.aPatientId = aPatientId;
+		this.aPrimaryId = aPrimaryId;
+		this.aTimeStart = aTimeStart;
+		this.aTimeEnd = aTimeEnd;
+	}
+	
+	public Appointment(Integer aId, Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, Date aTimeStart,
+			Date aTimeEnd) {
 		super();
 		this.aId = aId;
 		this.aDate = aDate;
@@ -155,19 +168,19 @@ public class Appointment {
 		this.aPrimaryId = aPrimaryId;
 	}
 
-	public LocalDateTime getaTimeStart() {
+	public Date getaTimeStart() {
 		return aTimeStart;
 	}
 
-	public void setaTimeStart(LocalDateTime aTimeStart) {
+	public void setaTimeStart(Date aTimeStart) {
 		this.aTimeStart = aTimeStart;
 	}
 
-	public LocalDateTime getaTimeEnd() {
+	public Date getaTimeEnd() {
 		return aTimeEnd;
 	}
 
-	public void setaTimeEnd(LocalDateTime aTimeEnd) {
+	public void setaTimeEnd(Date aTimeEnd) {
 		this.aTimeEnd = aTimeEnd;
 	}
 }
