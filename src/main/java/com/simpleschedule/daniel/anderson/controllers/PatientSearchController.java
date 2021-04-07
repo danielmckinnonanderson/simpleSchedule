@@ -83,7 +83,7 @@ public class PatientSearchController {
 			return "index";
 		} else {
 
-			model.addAttribute("viewPatient", viewPatient);
+			session.setAttribute("viewPatient", viewPatient);
 			model.addAttribute("viewContact", contactService.findContactBycPatientId(viewId));
 			model.addAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
 			//TO DO: add location service to retrieve preferred location for this patient
