@@ -1,30 +1,45 @@
 package com.simpleschedule.daniel.anderson.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.simpleschedule.daniel.anderson.entities.Location;
+import com.simpleschedule.daniel.anderson.entities.Staff;
+import com.simpleschedule.daniel.anderson.services.LocationService;
+import com.simpleschedule.daniel.anderson.services.StaffService;
+
 @Controller
 public class NavigationController {
+	private LocationService locationService;
+	private StaffService staffService;
 
 	@Autowired
-	public NavigationController() {
-		super();
+	public NavigationController(LocationService locationService, StaffService staffService) {
+		this.locationService = locationService;
+		this.staffService = staffService;
 	}
 
 	@GetMapping("/")
-	public String showMainPage() {
+	public String showMainPage(HttpSession session) {
+		if (session.getAttribute("doctorList") == null) {
+			List<Staff> doctorList = staffService.findAllDoctors();
+			session.setAttribute("doctorList", doctorList);
+		}
+		if (session.getAttribute("locationList") == null) {
+			Iterable<Location> locationList = locationService.getAll();
+			session.setAttribute("locationList", locationList);
+		}
 		return "index";
 	}
 
 	@GetMapping("/appointment_search")
 	public String showAppointmentSearch() {
 		return "appointment_search";
-	}
-
-	@GetMapping("/appointment_add")
-	public String showAppointmentAdd() {
-		return "appointment_add";
 	}
 }
