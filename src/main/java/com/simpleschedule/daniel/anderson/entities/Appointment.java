@@ -1,7 +1,7 @@
 package com.simpleschedule.daniel.anderson.entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,17 +38,19 @@ public class Appointment {
 	private Integer aPrimaryId;
 
 	@Column(name = "timeStart")
-	private LocalTime aTimeStart;
+//	@DateTimeFormat(iso=DateTimeFormat.ISO.TIME, pattern="hh:mm:ss a")
+	private LocalDateTime aTimeStart;
 
 	@Column(name = "timeEnd")
-	private LocalTime aTimeEnd;
+//	@DateTimeFormat(iso=DateTimeFormat.ISO.TIME, pattern="hh:mm:ss a")
+	private LocalDateTime aTimeEnd;
 
 	public Appointment() {
 		super();
 	}
 
-	public Appointment(Integer aId, Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, LocalTime aTimeStart,
-			LocalTime aTimeEnd) {
+	public Appointment(Integer aId, Date aDate, Integer aLocationId, Integer aPatientId, Integer aPrimaryId, LocalDateTime aTimeStart,
+			LocalDateTime aTimeEnd) {
 		super();
 		this.aId = aId;
 		this.aDate = aDate;
@@ -56,6 +59,13 @@ public class Appointment {
 		this.aPrimaryId = aPrimaryId;
 		this.aTimeStart = aTimeStart;
 		this.aTimeEnd = aTimeEnd;
+	}
+	
+	@Override
+	public String toString() {
+		return "Appointment [aId=" + aId + ", aDate=" + aDate + ", aLocationId=" + aLocationId + ", aPatientId="
+				+ aPatientId + ", aPrimaryId=" + aPrimaryId + ", aTimeStart=" + aTimeStart + ", aTimeEnd=" + aTimeEnd
+				+ "]";
 	}
 
 	@Override
@@ -145,19 +155,19 @@ public class Appointment {
 		this.aPrimaryId = aPrimaryId;
 	}
 
-	public LocalTime getaTimeStart() {
+	public LocalDateTime getaTimeStart() {
 		return aTimeStart;
 	}
 
-	public void setaTimeStart(LocalTime aTimeStart) {
+	public void setaTimeStart(LocalDateTime aTimeStart) {
 		this.aTimeStart = aTimeStart;
 	}
 
-	public LocalTime getaTimeEnd() {
+	public LocalDateTime getaTimeEnd() {
 		return aTimeEnd;
 	}
 
-	public void setaTimeEnd(LocalTime aTimeEnd) {
+	public void setaTimeEnd(LocalDateTime aTimeEnd) {
 		this.aTimeEnd = aTimeEnd;
 	}
 }
