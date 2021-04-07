@@ -1,5 +1,7 @@
 package com.simpleschedule.daniel.anderson.services;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,11 @@ public class LocationService {
 		this.locationRepository = locationRepository;
 	}
 	
-	public Iterable<Location> getAll() {
-		return locationRepository.findAll();
+	public HashMap<Integer, Location> getAll() {
+		HashMap<Integer, Location> locationMap = new HashMap<Integer, Location>();
+		for (Location location : locationRepository.findAll()) {
+			locationMap.put(location.getlId(), location);
+		}
+		return locationMap;
 	}
 }
