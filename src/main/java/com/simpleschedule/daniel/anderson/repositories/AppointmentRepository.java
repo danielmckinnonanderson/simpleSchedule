@@ -1,6 +1,5 @@
 package com.simpleschedule.daniel.anderson.repositories;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,5 +15,5 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
 //	List<Appointment> findByaPrimaryIdByOrderByADate(Integer aPrimaryId);
 	
 	//FIND APPOINTMENTS BY COMBINTATION OF COLUMNS
-	List<Appointment> findByADateAndATimeStart(Date aDate, LocalDateTime aTimeStart);
+	List<Appointment> findByADateAndATimeStart(Date aDate, Date aTimeStart);
 }
