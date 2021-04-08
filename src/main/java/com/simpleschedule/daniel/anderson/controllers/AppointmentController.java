@@ -31,6 +31,29 @@ public class AppointmentController {
 		this.appointmentService = appointmentService;
 	}
 	
+	@GetMapping("/appointment_search")
+	public String showAppointmentSearch(
+			@SessionAttribute(required=true, name="locationMap") HashMap<Integer, Location> locationMap,
+			@SessionAttribute(required=true, name="doctorList") List<Staff> doctorList,
+			Model model) {
+		model.addAttribute("searchAppointment", new Appointment());
+		return "appointment_search";
+	}
+	
+	@PostMapping("/appointment_search")
+	public String processAppointmentSearch(
+			@ModelAttribute("searchAttribute") Appointment searchAppointment,
+			BindingResult result,
+			Model model) {
+		if (result.hasErrors()) {
+			return "appointment_search";
+		}
+		System.out.println(searchAppointment);
+		List<Appointment> resultsList = appointmentService.findAppointmentUsingFields(searchAppointment);
+		model.addAttribute("resultsList", resultsList);
+		return "appointment_search_results";
+	}
+	
 	@GetMapping("/appointment_add")
 	public String showAppointmentAdd(
 			@SessionAttribute(required=true, name="locationMap") HashMap<Integer, Location> locationMap,
