@@ -26,8 +26,14 @@ public class ContactService {
 		return contactRepository.findByCPatientId(cPatientId);
 	}
 	
-	//UPDATE CONTACT:
+	//UPDATE CONTACT
 	public Contact updateContact(Contact updateContact) {
 		return contactRepository.save(updateContact);
+	}
+	
+	//DELETE CONTACT
+	public void deleteContact(Contact deleteContact) {
+		contactRepository.delete(deleteContact);
+		System.out.println("REMOVED: " + deleteContact);
 	}
 }
