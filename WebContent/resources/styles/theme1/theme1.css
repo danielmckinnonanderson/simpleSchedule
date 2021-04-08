@@ -15,7 +15,7 @@ text: primary #ffffff, body #917640, footer #719950
 }
 #container_page{
 	background-color: #ffffde;
-	width: 800px;
+	width: 912px;
 	margin: auto;
 }
 #container_header{
@@ -154,6 +154,16 @@ text: primary #ffffff, body #917640, footer #719950
 #form_dob {
 	font-family: 'Comfortaa', 'Arial', sans-serif;
 }
+#form_errorbox {
+	justify-content: center;
+	padding: 10px;
+	border: solid black 1px;
+	border-radius: 25px;
+	box-shadow: #c9c9b3 2px 2px 4px 2px;
+	background-color: white;
+	color: red;
+}
+
 .form_input_large {
 	font-family: Arial;
 	margin: 10px 5px 10px 5px;
@@ -171,7 +181,7 @@ text: primary #ffffff, body #917640, footer #719950
 }
 #form_dropdown {
 	width: 120px;
-	height: 38px;
+	height: 26px;
 }
 .form_row {
 	display: flex;
@@ -183,10 +193,44 @@ text: primary #ffffff, body #917640, footer #719950
 	font-family: 'Comfortaa';
 	color: #917640;
 }
-
-
 /* end patient_search.html */
 
+
+/* PATIENT_ADD.HTML STYLING*/
+#provider_select {
+	height: 26px;
+	margin-right: 28px;
+}
+#form_email {
+	width: 70%;
+}
+#form_add {
+	width: 90px;
+	height: 48px;
+}
+/* end patient_add.html*/
+
+
+/* SEARCH_RESULTS.HTML STYLING */
+#results_table {
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+#results_header {
+	color: white;
+	background-color: #2f451d;
+}
+#results_body {
+	border: 1px solid #ededca;
+}
+tr {
+	border: 1px solid e0b765;
+}
+tr:nth-child(even) {
+	background-color: #ededca;
+}
+/* end search_results.html styling	*/
 
 
 

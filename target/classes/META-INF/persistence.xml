@@ -31,7 +31,7 @@
 			<property name="hibernate.format_sql" value="true" />
 
 			<!-- Eclipselink config -->
-			<property name="eclipselink.logging.level" value="FINER" />
+			<property name="eclipselink.logging.level" value="FINEST" />
 			<property name="eclipselink.ddl-generation"
 				value="create-or-extend-tables" />
 
