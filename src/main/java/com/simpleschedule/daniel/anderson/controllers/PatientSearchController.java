@@ -75,9 +75,9 @@ public class PatientSearchController {
 			@RequestParam("viewId") Integer viewId,
 			HttpSession session,
 			Model model) {
-		
+		//find viewPatient using patient Id
 		Patient viewPatient = patientService.findByPId(viewId); 
-		
+		//if viewPatient does not exist throw exception
 		if (viewPatient == null) {
 			try {
 				throw new EntityNotFoundException("Patient not found under specified ID");
@@ -86,7 +86,7 @@ public class PatientSearchController {
 			}
 			return "index";
 		} else {
-
+			//add session attributes for all of viewPatient's relevant info to be displayed on patient_details
 			session.setAttribute("viewPatient", viewPatient);
 			session.setAttribute("viewContact", contactService.findContactBycPatientId(viewId));
 			session.setAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
@@ -95,6 +95,27 @@ public class PatientSearchController {
 			return "patient_details";
 		}
 	}
+	
+	//REQUEST METHODS FOR DELETING A PATIENT AND THEIR RELEVANT INFO
+	@GetMapping("/delete_patient")
+	public String showDeletePatientForm() {
+		return "delete_patient";
+	}
+	
+	
+	@PostMapping("/delete_patient")
+	public String deletePatient(
+			@SessionAttribute("viewPatient") Patient viewPatient,
+			@SessionAttribute("viewContact") Contact viewContact,
+			@SessionAttribute("viewInsurance") Insurance viewInsurance) {
+		//call service methods to delete patient, contact, and insurance
+		contactService.deleteContact(viewContact);
+		insuranceService.deleteInsurance(viewInsurance);
+		patientService.deletePatient(viewPatient);
+		//return to index
+		return "index";
+	}
+	
 	
 	//REQUEST METHODS CALLED FOR UPDATING SECTIONS ON THE PATIENT_DETAILS PAGE
 	
