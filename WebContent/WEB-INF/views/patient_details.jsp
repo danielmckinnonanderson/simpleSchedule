@@ -26,25 +26,34 @@
 				<h1><c:out value="${viewPatient.pFirstName} ${viewPatient.pLastName}"/></h1>
 				<div class="form_row">
 					<h5><a href="./appointment_add">Schedule Appointment</a></h5>
-					<h5><a href=#>Update Information</a></h5>
 					<h5><a href=#>Delete Patient</a></h5>
 				</div>
 				<div>
-					<h3>patient info</h3>
+					<div class="form_row">
+						<h3>patient info</h3>
+						<p><a href="update_info">Update Patient Info</a></p>
+					</div>
 					<ul>
 						<li class="form_row"><h4>Birth Date:</h4><p><fmt:formatDate value="${viewPatient.pDob}" type="date" pattern="MM-dd-YYYY" /></p></li>
 						<!-- TO DO: add 'preferred location' -->
 						<li class="form_row"><h4>Primary Care:</h4><p>${doctorList.get(viewPatient.pPrimary-1).sLastName}</p>
 					</ul>
-					<h3>contact info</h3>
+					<div class="form_row">
+						<h3>contact info</h3>
+						<p><a href="./update_contact">Update Contact</a></p>
+					</div>
 					<ul>
 						<li class="form_row"><h4>Phone 1:</h4><p> ${viewContact.cPhone1}</p></li>
 						<li class="form_row"><h4>Phone 2:</h4><p> ${viewContact.cPhone2}</p></li>
 						<li class="form_row"><h4>Phone 3:</h4><p> ${viewContact.cPhone3}</p></li>
 						<li class="form_row"><h4>Email:</h4><p>${viewContact.cEmail}</p>
 					</ul>
-					<h3>insurance info</h3>
+					<div class="form_row">
+						<h3>insurance info</h3>
+						<p><a href="./update_insurance">Update Insurance</a></p>
+					</div>
 					<ul>
+						<li class="form_row"><h4>Insurance Provider:</h4><p>${viewInsurance.iProvider}</p></li>
 						<li class="form_row"><h4>Insurance ID:</h4><p> ${viewInsurance.iId}</p></li>
 						<li class="form_row"><h4>Group ID:</h4><p> ${viewInsurance.iGroupId}</p></li>
 						<li class="form_row"><h4>Plan ID:</h4><p> ${viewInsurance.iPlanId}</p></li>

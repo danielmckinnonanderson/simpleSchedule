@@ -24,4 +24,9 @@ public class InsuranceService {
 	public Insurance saveNewInsurance(Insurance insurance) {
 		return insuranceRepository.save(insurance);
 	}
+	
+	//UPDATE INSURANCE
+	public Insurance updateInsurance(Insurance updateInsurance) {
+		return insuranceRepository.save(updateInsurance);
+	}
 }

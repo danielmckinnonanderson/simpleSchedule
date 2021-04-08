@@ -73,8 +73,7 @@ public class PatientAddController {
 	public String processNewInsurance(
 			@ModelAttribute("newInsurance") Insurance newInsurance,
 			BindingResult result,
-			HttpSession session,
-			Model model) {
+			HttpSession session) {
 		if (result.hasErrors()) {
 			return "patient_add_insurance";
 		}
@@ -94,8 +93,7 @@ public class PatientAddController {
 			@SessionAttribute("newInsurance") Insurance newInsurance,
 			@ModelAttribute("newContact") Contact newContact,
 			BindingResult result,
-			HttpSession session,
-			Model model) {
+			HttpSession session) {
 		if (result.hasErrors()) {
 			return "patient_add_contact";
 		}
@@ -115,10 +113,10 @@ public class PatientAddController {
 		contactService.saveNewContact(newContact);
 		insuranceService.saveNewInsurance(newInsurance);
 		
-		//assign patient, contact, and service to 'view' model attributes for patient_details page
-		model.addAttribute("viewPatient", newPatient);
-		model.addAttribute("viewContact", newContact);
-		model.addAttribute("viewInsurance", newInsurance);
+		//assign patient, contact, and service to 'view' session attributes for patient_details page
+		session.setAttribute("viewPatient", newPatient);
+		session.setAttribute("viewContact", newContact);
+		session.setAttribute("viewInsurance", newInsurance);
 		
 		return "patient_details";
 	}

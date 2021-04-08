@@ -23,6 +23,11 @@ public class PatientService {
 		return patientRepository.findByPId(pId);
 	}
 	
+	//SAVE NEW PATIENT
+	public Patient saveNewPatient(Patient patient) {
+		return patientRepository.save(patient);
+	}
+	
 	//CUSTOM FINDER METHODS FOR ATTRIBUTES
 	private List<Patient> findByPFirstName(String pFirstName) {
 		return patientRepository.findByPFirstName(pFirstName);
@@ -133,8 +138,29 @@ public class PatientService {
 		}
 	}
 	
-	//SAVE NEW PATIENT
-	public Patient saveNewPatient(Patient patient) {
-		return patientRepository.save(patient);
+	//UPDATE PATIENT FROM FIELDS
+	public Patient updatePatient(Patient oldPatient, Patient updatePatient) {
+		//check for null field values and if oldPatient's value is also not null, set updatePatient's value equal to oldPatient's
+		if (updatePatient.getpFirstName() == null && oldPatient.getpFirstName() != null) {
+			updatePatient.setpFirstName(oldPatient.getpFirstName());
+			System.out.println("New FirstName: " + updatePatient.getpFirstName());
+		}
+		if (updatePatient.getpLastName() == null && oldPatient.getpLastName() != null) {
+			updatePatient.setpLastName(oldPatient.getpLastName());
+			System.out.println("New LastName: " + updatePatient.getpLastName());
+		}
+		if (updatePatient.getpDob() == null && oldPatient.getpDob() != null) {
+			updatePatient.setpDob(oldPatient.getpDob());
+			System.out.println("New Dob: " + updatePatient.getpDob());
+		}
+		if (updatePatient.getpPrimary() == null && oldPatient.getpPrimary() != null) {
+			updatePatient.setpPrimary(oldPatient.getpPrimary());
+			System.out.println("New Primary: " + updatePatient.getpPrimary());
+		}
+		//merge updated patient to the database
+		System.out.println(updatePatient);
+		return patientRepository.save(updatePatient);
 	}
+	
+	
 }

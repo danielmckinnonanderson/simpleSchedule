@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.simpleschedule.daniel.anderson.entities.Contact;
 import com.simpleschedule.daniel.anderson.entities.Insurance;
@@ -87,11 +88,100 @@ public class PatientSearchController {
 		} else {
 
 			session.setAttribute("viewPatient", viewPatient);
-			model.addAttribute("viewContact", contactService.findContactBycPatientId(viewId));
-			model.addAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
+			session.setAttribute("viewContact", contactService.findContactBycPatientId(viewId));
+			session.setAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
 			//TO DO: add location service to retrieve preferred location for this patient
 			session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewId));
 			return "patient_details";
 		}
+	}
+	
+	//REQUEST METHODS CALLED FOR UPDATING SECTIONS ON THE PATIENT_DETAILS PAGE
+	
+	//UPDATE PATIENT INFO
+	@GetMapping("/update_info")
+	public String updatePatientInfo(
+			@SessionAttribute("viewPatient") Patient viewPatient,
+			Model model) {
+		//add model attribute to store updated information
+		model.addAttribute("updatePatient", new Patient());
+		return "update_info";
+	}
+	
+	@PostMapping("/update_info")
+	public String mergePatientInfo(
+			@SessionAttribute("viewPatient") Patient oldPatient,
+			@ModelAttribute("updatePatient") Patient updatePatient,
+			BindingResult result,
+			HttpSession session,
+			Model model) {
+		if (result.hasErrors()) {
+			return "update_info";
+		}
+		System.out.println("updatePatient: " + updatePatient);
+		//call patient service method to parse null values and update non-null fields for patient
+		Patient updatedPatient = patientService.updatePatient(oldPatient, updatePatient);
+		
+		//set updated Patient to session attribute 'viewPatient' for viewing on patient_details
+		session.setAttribute("viewPatient", updatedPatient);
+		
+		//send back to patient_details
+		return "patient_details";
+	}
+	
+	//UPDATE CONTACT INFO
+	@GetMapping("/update_contact")
+	public String updatePatientContact(
+			@SessionAttribute("viewContact") Contact viewContact,
+			Model model) {
+		model.addAttribute("updateContact", new Contact());
+		return "update_contact";
+	}
+	
+	@PostMapping("/update_contact")
+	public String mergePatientContact(
+			@ModelAttribute("updateContact") Contact updateContact,
+			BindingResult result,
+			HttpSession session,
+			Model model) {
+		if (result.hasErrors()) {
+			return "update_contact";
+		}
+		System.out.println("updateContact: " + updateContact);
+		//call contact service method to update contact
+		Contact updatedContact = contactService.updateContact(updateContact);
+		
+		//set updatedContact to session attribute 'viewContact' for viewing on patient_details
+		session.setAttribute("viewContact", updatedContact);
+		
+		//send back to patient_details
+		return "patient_details";
+	}
+	
+	//UPDATE INSURANCE INFO
+	@GetMapping("/update_insurance")
+	public String updatePatientInsurance(
+			@SessionAttribute("viewInsurance") Insurance viewInsurance,
+			Model model) {
+		model.addAttribute("updateInsurance", new Insurance());
+		return "update_insurance";
+	}
+	
+	@PostMapping("/update_insurance")
+	public String mergePatientInsurance(
+			@ModelAttribute("updateInsurance") Insurance updateInsurance,
+			BindingResult result,
+			HttpSession session,
+			Model model) {
+		if (result.hasErrors()) {
+			return "update_contact";
+		}
+		System.out.println("updateInsurance: " + updateInsurance);
+		//call insurance service method to update insurance
+		Insurance updatedInsurance = insuranceService.updateInsurance(updateInsurance);
+		
+		//set updatedInsurance to session attribute 'viewInsurance' for viewing on patient_details
+		session.setAttribute("viewInsurance", updatedInsurance);
+		return "patient_details";
 	}
 }
