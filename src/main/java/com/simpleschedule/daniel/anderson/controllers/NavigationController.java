@@ -39,9 +39,4 @@ public class NavigationController {
 		}
 		return "index";
 	}
-
-	@GetMapping("/appointment_search")
-	public String showAppointmentSearch() {
-		return "appointment_search";
-	}
 }
