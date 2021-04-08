@@ -25,4 +25,9 @@ public class ContactService {
 	public Contact findContactBycPatientId(Integer cPatientId) {
 		return contactRepository.findByCPatientId(cPatientId);
 	}
+	
+	//UPDATE CONTACT:
+	public Contact updateContact(Contact updateContact) {
+		return contactRepository.save(updateContact);
+	}
 }
