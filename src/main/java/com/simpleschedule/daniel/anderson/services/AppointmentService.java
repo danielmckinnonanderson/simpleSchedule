@@ -1,7 +1,9 @@
 package com.simpleschedule.daniel.anderson.services;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,18 @@ public class AppointmentService {
 		this.appointmentRepository = appointmentRepository;
 	}
 	
+	public Appointment findByAId(Integer aId) {
+		return appointmentRepository.findByAId(aId);
+	}
+	
 	//GET ALL APPOINTMENTS FOR SPECIFIED PATIENT
-	public List<Appointment> findByAPatientId(Integer aPatientId) {
-		return appointmentRepository.findByAPatientId(aPatientId);
+	public Map<Integer, Appointment> findByAPatientId(Integer aPatientId) {
+		Map<Integer, Appointment> appointmentMap = new HashMap<>();
+		for (Appointment appointment : appointmentRepository.findByAPatientId(aPatientId)) {
+			System.out.println(appointment);
+			appointmentMap.put(appointment.getaId(), appointment);
+		}
+		return appointmentMap;	
 	}
 	
 	//ADD A NEW APPOINTMENT TO THE DATABASE
@@ -28,7 +39,59 @@ public class AppointmentService {
 		return appointmentRepository.save(appointment);
 	}
 	
-	//CUSTOM FINDER METHODS FOR ATTRIBUTES
+	//DELETE AN APPOINTMENT
+	public void deleteAppointment(Integer aId) {
+		appointmentRepository.deleteById(aId);
+	}
+	
+	//PUBLIC METHOD RETURNING MAP
+	public Map<Integer, Appointment> findAppointmentsUsingFields(Appointment searchAppointment) {
+		Map<Integer, Appointment> appointmentMap = new HashMap<>();
+		for (Appointment appointment : findAppointmentUsingFields(searchAppointment)) {
+			appointmentMap.put(appointment.getaId(), appointment);
+		}
+		return appointmentMap;
+	}
+	
+	//METHOD FOR DISCERNING USER INPUTS AND CALLING APPROPRIATE QUERY METHOD
+	private List<Appointment> findAppointmentUsingFields(Appointment appointment) {
+		if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
+			return findByADateAndATimeStartAndALocationIdAndAPrimaryId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaLocationId(), appointment.getaPrimaryId());
+		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaLocationId() != null) {
+			return findByADateAndATimeStartAndALocationId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaLocationId());
+		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaPrimaryId() != null) {
+			return findByADateAndATimeStartAndAPrimaryId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaPrimaryId());
+		} else if (appointment.getaDate() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
+			return findByADateAndALocationIdAndAPrimaryId(appointment.getaDate(), appointment.getaLocationId(), appointment.getaPrimaryId());
+		} else if (appointment.getaTimeStart() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
+			return findByATimeStartAndALocationIdAndAPrimaryId(appointment.getaTimeStart(), appointment.getaLocationId(), appointment.getaPrimaryId());
+		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null) {
+			return findByADateAndATimeStart(appointment.getaDate(), appointment.getaTimeStart());
+		} else if (appointment.getaDate() != null && appointment.getaLocationId() != null) {
+			return findByADateAndALocationId(appointment.getaDate(), appointment.getaLocationId());
+		} else if (appointment.getaDate() != null && appointment.getaPrimaryId() != null) {
+			return findByADateAndAPrimaryId(appointment.getaDate(), appointment.getaPrimaryId());
+		} else if (appointment.getaTimeStart() != null && appointment.getaLocationId() != null) {
+			return findByATimeStartAndALocationId(appointment.getaTimeStart(), appointment.getaLocationId());
+		} else if (appointment.getaTimeStart() != null && appointment.getaPrimaryId() != null) {
+			return findByATimeStartAndAPrimaryId(appointment.getaTimeStart(), appointment.getaPrimaryId());
+		} else if (appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
+			return findByALocationIdAndAPrimaryId(appointment.getaLocationId(), appointment.getaPrimaryId());
+		} else if (appointment.getaDate() != null) {
+			return findByADate(appointment.getaDate());
+		} else if (appointment.getaTimeStart() != null) {
+			return findByATimeStart(appointment.getaTimeStart());
+		} else if (appointment.getaLocationId() != null) {
+			return findByALocationId(appointment.getaLocationId());
+		} else if (appointment.getaPrimaryId() != null) {
+			return findByAPrimaryId(appointment.getaPrimaryId());
+		} else {
+			System.out.println("No Fields Provided");
+			return null;
+		}
+	} 
+	
+	//PRIVATE FINDER METHODS FOR ATTRIBUTES CALLED BY findAppointmentUsingFields
 	private List<Appointment> findByADate(Date aDate) {
 		return appointmentRepository.findByADate(aDate);
 	}
@@ -74,42 +137,4 @@ public class AppointmentService {
 	private List<Appointment> findByADateAndATimeStartAndALocationIdAndAPrimaryId(Date aDate, Date aTimeStart, Integer aLocationId, Integer aPrimaryId) {
 		return appointmentRepository.findByADateAndATimeStartAndALocationIdAndAPrimaryId(aDate, aTimeStart, aLocationId, aPrimaryId);
 	}
-	
-	//TOP-LEVEL METHOD FOR DISCERNING USER INPUTS AND CALLING APPROPRIATE QUERY METHOD
-	public List<Appointment> findAppointmentUsingFields(Appointment appointment) {
-		if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
-			return findByADateAndATimeStartAndALocationIdAndAPrimaryId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaLocationId(), appointment.getaPrimaryId());
-		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaLocationId() != null) {
-			return findByADateAndATimeStartAndALocationId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaLocationId());
-		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaPrimaryId() != null) {
-			return findByADateAndATimeStartAndAPrimaryId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaPrimaryId());
-		} else if (appointment.getaDate() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
-			return findByADateAndALocationIdAndAPrimaryId(appointment.getaDate(), appointment.getaLocationId(), appointment.getaPrimaryId());
-		} else if (appointment.getaTimeStart() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
-			return findByATimeStartAndALocationIdAndAPrimaryId(appointment.getaTimeStart(), appointment.getaLocationId(), appointment.getaPrimaryId());
-		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null) {
-			return findByADateAndATimeStart(appointment.getaDate(), appointment.getaTimeStart());
-		} else if (appointment.getaDate() != null && appointment.getaLocationId() != null) {
-			return findByADateAndALocationId(appointment.getaDate(), appointment.getaLocationId());
-		} else if (appointment.getaDate() != null && appointment.getaPrimaryId() != null) {
-			return findByADateAndAPrimaryId(appointment.getaDate(), appointment.getaPrimaryId());
-		} else if (appointment.getaTimeStart() != null && appointment.getaLocationId() != null) {
-			return findByATimeStartAndALocationId(appointment.getaTimeStart(), appointment.getaLocationId());
-		} else if (appointment.getaTimeStart() != null && appointment.getaPrimaryId() != null) {
-			return findByATimeStartAndAPrimaryId(appointment.getaTimeStart(), appointment.getaPrimaryId());
-		} else if (appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
-			return findByALocationIdAndAPrimaryId(appointment.getaLocationId(), appointment.getaPrimaryId());
-		} else if (appointment.getaDate() != null) {
-			return findByADate(appointment.getaDate());
-		} else if (appointment.getaTimeStart() != null) {
-			return findByATimeStart(appointment.getaTimeStart());
-		} else if (appointment.getaLocationId() != null) {
-			return findByALocationId(appointment.getaLocationId());
-		} else if (appointment.getaPrimaryId() != null) {
-			return findByAPrimaryId(appointment.getaPrimaryId());
-		} else {
-			System.out.println("No Fields Provided");
-			return null;
-		}
-	} 
 }
