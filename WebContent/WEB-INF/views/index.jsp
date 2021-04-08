@@ -29,10 +29,6 @@
 						<a href="./appointment_search"><h3>find existing
 								appointment</h3></a>
 					</div>
-					<div class="button_body">
-						<a href="./appointment_add"><h3>schedule an
-								appointment</h3></a>
-					</div>
 				</div>
 			</div>
 

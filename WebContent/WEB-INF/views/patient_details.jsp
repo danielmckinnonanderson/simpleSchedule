@@ -66,21 +66,25 @@
 						<tr>
 							<th><p>Date</p></th>
 							<th><p>Start Time</p></th>
+							<th><p>End Time</p></th>
 							<th><p>Location</p></th>
 							<th><p>Provider</p></th>
-							<th><p>Modify</p></th>
+							<th><p>Delete</p></th>
 						</tr>
 					</thead>
 					<tbody id='results_body'>
 						<c:forEach var="appointment" items="${viewAppointments}">
-								<tr>
-									<td><p><fmt:formatDate value="${appointment.aDate}" type="date" pattern="MM-dd-YY"/></p></td>
-									<td><p><fmt:formatDate value="${appointment.aTimeStart}" type="time" pattern="HH:mm a"/></p></td>
-									<td><p><c:out value="${locationMap.get(appointment.aLocationId).lCity}, ${locationMap.get(appointment.aLocationId).lState}" /></p></td>
-									<td><p><c:out value="${doctorList.get(appointment.aPrimaryId -1).sLastName}"/></p></td>
-									<!-- TO DO: add delete button -->
-									<td><p> Button </p></td>
-								</tr>
+							<tr>
+								<form:form path="./delete_appointment" method="get" action ="./delete_appointment">
+									<td><p><fmt:formatDate value="${appointment.value.aDate}" type="date" pattern="MM-dd-YY"/></p></td>
+									<td><p><fmt:formatDate value="${appointment.value.aTimeStart}" type="time" pattern="hh:mm a"/></p></td>
+									<td><p><fmt:formatDate value="${appointment.value.aTimeEnd}" type="time" pattern="hh:mm a"/></p></td>
+									<td><p><c:out value="${locationMap.get(appointment.value.aLocationId).lCity}, ${locationMap.get(appointment.value.aLocationId).lState}" /></p></td>
+									<td><p><c:out value="${doctorList.get(appointment.value.aPrimaryId-1).sLastName}"/></p></td>
+									<input type="hidden" value="${appointment.key}" name="appointmentId"/>
+									<td><input type="submit" value="Delete"/></td>
+								</form:form>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>

@@ -49,12 +49,12 @@
 							</form:select>
 						</div>
 						<c:if test ="${hasErrors}">
-						<div id="form_errorbox">
-							<p><form:errors path="aDate"/></p>
-							<p><form:errors path="aTimeStart"/></p>
-							<p><form:errors path="aLocationId"/></p>
-							<p><form:errors path="aPrimaryId"/></p>
-						</div>
+							<div id="form_errorbox">
+								<p><form:errors path="aDate"/></p>
+								<p><form:errors path="aTimeStart"/></p>
+								<p><form:errors path="aLocationId"/></p>
+								<p><form:errors path="aPrimaryId"/></p>
+							</div>
 						</c:if>
 						<div class="form_row" style="justify-content: center;">
 							<input type="submit" value="Search" id="form_submit">
