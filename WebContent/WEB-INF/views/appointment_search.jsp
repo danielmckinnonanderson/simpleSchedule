@@ -24,20 +24,20 @@
 					<h1>find an appointment:</h1>
 					<h4>fill out one or more forms to refine search:</h4>
 				</div>
-				<div>
+								<div>
 					<form:form action="./appointment_search" method="post" modelAttribute="searchAppointment">
 						<div class="form_row">
 							<h4>Date:</h4>
 							<form:input path="aDate" type="date"/>
 							<h4>Start Time:</h4>
-							<form:input path="aTimeStart" type="time" />						
+							<form:input path="aTimeStart" type="time" min="08:00" max="04:30" step="900"/>			
 						</div>
 						<div class="form_row">
 							<h4>Location:</h4>
 							<form:select path="aLocationId">
 								<option value=""> Select </option>
-								<c:forEach items="${locationList}" var="location">
-									<option value="${location.lId}">${location.lCity}, ${location.lState}</option>
+								<c:forEach items="${locationMap}" var="location">
+									<option value="${location.key}">${location.value.lCity}, ${location.value.lState}</option>
 								</c:forEach>
 							</form:select>
 							<h4>Physician:</h4>
