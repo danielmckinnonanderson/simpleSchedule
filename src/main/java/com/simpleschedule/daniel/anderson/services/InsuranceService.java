@@ -29,4 +29,10 @@ public class InsuranceService {
 	public Insurance updateInsurance(Insurance updateInsurance) {
 		return insuranceRepository.save(updateInsurance);
 	}
+	
+	//DELETE INSURANCE
+	public void deleteInsurance(Insurance deleteInsurance) {
+		insuranceRepository.delete(deleteInsurance);
+		System.out.println("REMOVED: " + deleteInsurance);
+	}
 }

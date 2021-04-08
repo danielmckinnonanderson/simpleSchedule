@@ -25,8 +25,8 @@
 				<h3>patient details</h3>
 				<h1><c:out value="${viewPatient.pFirstName} ${viewPatient.pLastName}"/></h1>
 				<div class="form_row">
-					<h5><a href="./appointment_add">Schedule Appointment</a></h5>
-					<h5><a href=#>Delete Patient</a></h5>
+					<h5><a href="./appointment_add"><button class="form_button">Schedule Appointment</button></a></h5>
+					<h5><a href="./delete_patient"><button type="button" class="form_button">Delete Patient</button></a></h5>
 				</div>
 				<div>
 					<div class="form_row">
@@ -78,6 +78,7 @@
 									<td><p><fmt:formatDate value="${appointment.aTimeStart}" type="time" pattern="HH:mm a"/></p></td>
 									<td><p><c:out value="${locationMap.get(appointment.aLocationId).lCity}, ${locationMap.get(appointment.aLocationId).lState}" /></p></td>
 									<td><p><c:out value="${doctorList.get(appointment.aPrimaryId -1).sLastName}"/></p></td>
+									<!-- TO DO: add delete button -->
 									<td><p> Button </p></td>
 								</tr>
 						</c:forEach>

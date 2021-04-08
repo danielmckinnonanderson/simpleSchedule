@@ -28,64 +28,13 @@ public class PatientService {
 		return patientRepository.save(patient);
 	}
 	
-	//CUSTOM FINDER METHODS FOR ATTRIBUTES
-	private List<Patient> findByPFirstName(String pFirstName) {
-		return patientRepository.findByPFirstName(pFirstName);
-	}
-	private List<Patient> findByPFirstNameAndPLastName(String pFirstName, String pLastName) {
-		return patientRepository.findByPFirstNameAndPLastName(pFirstName, pLastName);
-	}
-	private List<Patient> findByPFirstNameAndPDob(String pFirstName, Date pDob) {
-		return patientRepository.findByPFirstNameAndPDob(pFirstName, pDob);
-	}
-	private List<Patient> findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary) {
-		return patientRepository.findByPFirstNameAndPPrimary(pFirstName, pPrimary);
-	}
-	private List<Patient> findByPFirstNameAndPLastNameAndPDob(
-			String pFirstName, String pLastName, Date pDob) {
-		return patientRepository.findByPFirstNameAndPLastNameAndPDob(
-				pFirstName, pLastName, pDob);
-	}
-	private List<Patient> findByPFirstNameAndPLastNameAndPPrimary(
-			String pFirstName, String pLastName, Integer pPrimary) {
-		return patientRepository.findByPFirstNameAndPLastNameAndPPrimary(
-				pFirstName, pLastName, pPrimary);
-	}
-	private List<Patient> findByPFirstNameAndPDobAndPPrimary(
-			String pFirstName, Date pDob, Integer pPrimary) {
-		return patientRepository.findByPFirstNameAndPDobAndPPrimary(
-				pFirstName, pDob, pPrimary);
-	}
-	private List<Patient> findByPLastName(String pLastName) {
-		return patientRepository.findByPLastName(pLastName);
-	}
-	private List<Patient> findByPLastNameAndPDob(String pLastName, Date pDob) {
-		return patientRepository.findByPLastNameAndPDob(pLastName, pDob);
-	}
-	private List<Patient> findByPLastNameAndPPrimary(String pLastName, Integer pPrimary) {
-		return patientRepository.findByPLastNameAndPPrimary(pLastName, pPrimary);
-	}
-	private List<Patient> findByPLastNameAndPDobAndPPrimary(
-			String pLastName, Date pDob, Integer pPrimary) {
-		return patientRepository.findByPLastNameAndPDobAndPPrimary(
-				pLastName, pDob, pPrimary);
-	}
-	private List<Patient> findByPDob(Date pDob) {
-		return patientRepository.findByPDob(pDob);
-	}
-	private List<Patient> findByPDobAndPPrimary(Date pDob, Integer pPrimary) {
-		return patientRepository.findByPDobAndPPrimary(pDob, pPrimary);
-	}
-	private List<Patient> findByPPrimary(Integer pPrimary) {
-		return patientRepository.findByPPrimary(pPrimary);
-	}
-	private List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimary(
-			String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
-		return patientRepository.findByPFirstNameAndPLastNameAndPDobAndPPrimary(
-				pFirstName, pLastName, pDob, pPrimary);
+	//DELETE PATIENT
+	public void deletePatient(Patient deletePatient) {
+		patientRepository.delete(deletePatient);
+		System.out.println("REMOVED: " + deletePatient);
 	}
 	
-	//HIGHER-LEVEL...DISCERNING USER INPUT AND ROUTING TO APPROPRIATE QUERY METHOD
+	//DISCERNING USER INPUT AND ROUTING TO APPROPRIATE QUERY METHOD
 	public List<Patient> findPatientUsingFields(
 			Patient patient) {
 		//setup null values from blank fields
@@ -162,5 +111,60 @@ public class PatientService {
 		return patientRepository.save(updatePatient);
 	}
 	
-	
+	//PRIVATE FINDER METHODS FOR ATTRIBUTES (CALLED BY findPatientUsingFields)
+	private List<Patient> findByPFirstName(String pFirstName) {
+		return patientRepository.findByPFirstName(pFirstName);
+	}
+	private List<Patient> findByPFirstNameAndPLastName(String pFirstName, String pLastName) {
+		return patientRepository.findByPFirstNameAndPLastName(pFirstName, pLastName);
+	}
+	private List<Patient> findByPFirstNameAndPDob(String pFirstName, Date pDob) {
+		return patientRepository.findByPFirstNameAndPDob(pFirstName, pDob);
+	}
+	private List<Patient> findByPFirstNameAndPPrimary(String pFirstName, Integer pPrimary) {
+		return patientRepository.findByPFirstNameAndPPrimary(pFirstName, pPrimary);
+	}
+	private List<Patient> findByPFirstNameAndPLastNameAndPDob(
+			String pFirstName, String pLastName, Date pDob) {
+		return patientRepository.findByPFirstNameAndPLastNameAndPDob(
+				pFirstName, pLastName, pDob);
+	}
+	private List<Patient> findByPFirstNameAndPLastNameAndPPrimary(
+			String pFirstName, String pLastName, Integer pPrimary) {
+		return patientRepository.findByPFirstNameAndPLastNameAndPPrimary(
+				pFirstName, pLastName, pPrimary);
+	}
+	private List<Patient> findByPFirstNameAndPDobAndPPrimary(
+			String pFirstName, Date pDob, Integer pPrimary) {
+		return patientRepository.findByPFirstNameAndPDobAndPPrimary(
+				pFirstName, pDob, pPrimary);
+	}
+	private List<Patient> findByPLastName(String pLastName) {
+		return patientRepository.findByPLastName(pLastName);
+	}
+	private List<Patient> findByPLastNameAndPDob(String pLastName, Date pDob) {
+		return patientRepository.findByPLastNameAndPDob(pLastName, pDob);
+	}
+	private List<Patient> findByPLastNameAndPPrimary(String pLastName, Integer pPrimary) {
+		return patientRepository.findByPLastNameAndPPrimary(pLastName, pPrimary);
+	}
+	private List<Patient> findByPLastNameAndPDobAndPPrimary(
+			String pLastName, Date pDob, Integer pPrimary) {
+		return patientRepository.findByPLastNameAndPDobAndPPrimary(
+				pLastName, pDob, pPrimary);
+	}
+	private List<Patient> findByPDob(Date pDob) {
+		return patientRepository.findByPDob(pDob);
+	}
+	private List<Patient> findByPDobAndPPrimary(Date pDob, Integer pPrimary) {
+		return patientRepository.findByPDobAndPPrimary(pDob, pPrimary);
+	}
+	private List<Patient> findByPPrimary(Integer pPrimary) {
+		return patientRepository.findByPPrimary(pPrimary);
+	}
+	private List<Patient> findByPFirstNameAndPLastNameAndPDobAndPPrimary(
+			String pFirstName, String pLastName, Date pDob, Integer pPrimary) {
+		return patientRepository.findByPFirstNameAndPLastNameAndPDobAndPPrimary(
+				pFirstName, pLastName, pDob, pPrimary);
+	}
 }
