@@ -63,14 +63,14 @@
 						</tr>
 					</thead>
 					<tbody id='results_body'>
-						<c:forEach items="${appointmentList}" var="appointment">
-							<tr>
-								<td><p><c:out value="${appointment.aDate}"/></p></td>
-								<td><p><c:out value="${appointment.aTimeStart}"/></p></td>
-								<td><p><c:out value="${locationMap.get(appointment.aLocationId)}"/></p></td>
-								<td><p><c:out value="${appointment.aPrimaryId}"/></p></td>
-								<td><p> button </p></td>
-							</tr>
+						<c:forEach var="appointment" items="${viewAppointments}">
+								<tr>
+									<td><p><fmt:formatDate value="${appointment.aDate}" type="date" pattern="MM-dd-YY"/></p></td>
+									<td><p><fmt:formatDate value="${appointment.aTimeStart}" type="time" pattern="HH:mm a"/></p></td>
+									<td><p><c:out value="${locationMap.get(appointment.aLocationId).lCity}, ${locationMap.get(appointment.aLocationId).lState}" /></p></td>
+									<td><p><c:out value="${doctorList.get(appointment.aPrimaryId -1).sLastName}"/></p></td>
+									<td><p> Button </p></td>
+								</tr>
 						</c:forEach>
 					</tbody>
 				</table>
