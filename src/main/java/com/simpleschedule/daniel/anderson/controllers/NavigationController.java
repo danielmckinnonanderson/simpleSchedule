@@ -29,10 +29,12 @@ public class NavigationController {
 
 	@GetMapping("/")
 	public String showMainPage(HttpSession session) {
+		// if session attribute 'doctorList' is not yet initialized, call staffService method and set it
 		if (session.getAttribute("doctorList") == null) {
 			List<Staff> doctorList = staffService.findAllDoctors();
 			session.setAttribute("doctorList", doctorList);
 		}
+		// if session attribute 'locationMap' is not yet initialized, call locationService method and set it
 		if (session.getAttribute("locationMap") == null) {
 			HashMap<Integer, Location> locationMap = locationService.getAll();
 			session.setAttribute("locationMap", locationMap);
