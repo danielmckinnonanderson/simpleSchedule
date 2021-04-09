@@ -7,7 +7,14 @@ version 1.0 released April 9, 2021
 
 [GitHub](https://github.com/danielmckinnonanderson/simpleSchedule)
 
----------------------------------------------------------------
+------------------------------------------------------------------
+
+**First-time Setup**
+
+Navigate to the folder 'database', and run the SQL file 'initialize_simpleScheduleDB' to create the tables and intial data
+
+-------------------------------------------------------------------
+
 
 **Overview**
 
