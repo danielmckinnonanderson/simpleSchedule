@@ -36,7 +36,44 @@ public class Insurance {
 		return String.format("Insurance for Patient ID%s: ID: %s, GroupID: %s, PlanID: %s, Provider: %s",
 				iPatientId, iId, iGroupId, iPlanId, iProvider);
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Insurance other = (Insurance) obj;
+		if (iGroupId == null) {
+			if (other.iGroupId != null)
+				return false;
+		} else if (!iGroupId.equals(other.iGroupId))
+			return false;
+		if (iId == null) {
+			if (other.iId != null)
+				return false;
+		} else if (!iId.equals(other.iId))
+			return false;
+		if (iPatientId == null) {
+			if (other.iPatientId != null)
+				return false;
+		} else if (!iPatientId.equals(other.iPatientId))
+			return false;
+		if (iPlanId == null) {
+			if (other.iPlanId != null)
+				return false;
+		} else if (!iPlanId.equals(other.iPlanId))
+			return false;
+		if (iProvider == null) {
+			if (other.iProvider != null)
+				return false;
+		} else if (!iProvider.equals(other.iProvider))
+			return false;
+		return true;
+	}
+
 	public Insurance(Integer iPatientId, String iId, String iGroupId, String planId, String iProvider) {
 		super();
 		this.iPatientId = iPatientId;
