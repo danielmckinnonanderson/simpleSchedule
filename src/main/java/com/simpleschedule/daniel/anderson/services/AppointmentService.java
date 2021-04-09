@@ -1,5 +1,6 @@
 package com.simpleschedule.daniel.anderson.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +54,7 @@ public class AppointmentService {
 	//ADD A NEW APPOINTMENT TO THE DATABASE
 	public Appointment saveAppointment(Appointment appointment) {
 		if (appointment != null) {
-			if (appointmentRepository.findByAId(appointment.getaId()) != null) {
+			if (appointmentRepository.findByAId(appointment.getaId()) == null) {
 				return appointmentRepository.save(appointment);
 			} else {
 				return null;
@@ -116,7 +117,8 @@ public class AppointmentService {
 			return findByAPrimaryId(appointment.getaPrimaryId());
 		} else {
 			System.out.println("No Fields Provided");
-			return null;
+			List<Appointment> emptyList = new ArrayList<>();
+			return emptyList;
 		}
 	} 
 	
