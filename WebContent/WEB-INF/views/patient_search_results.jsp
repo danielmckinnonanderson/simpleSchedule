@@ -37,16 +37,16 @@
 					</thead>
 					<tbody id='results_body'>
 						<c:forEach var="patient" items="${resultsList}">
-							<form:form action="./patient_search_results" method="post">
-								<tr>
+							<tr>
+								<form:form action="./patient_search_results" method="post">
 									<td><p><c:out value="${patient.pFirstName}" /></p></td>
 									<td><p><c:out value="${patient.pLastName}" /></p></td>
 									<td><p><fmt:formatDate value="${patient.pDob}" type="date" pattern="MM-dd-YYYY" /></p></td>
 									<td><p><c:out value="${doctorList.get(patient.pPrimary-1).sLastName}" /></p></td>
 									<input type=hidden name="viewId" value="${patient.pId}"/>
 									<td><input type="submit" value="View Details"/></td>
-								</tr>
-							</form:form>
+								</form:form>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>

@@ -17,11 +17,55 @@ public class InsuranceService {
 	
 	//FIND BY iPatientId
 	public Insurance findByiPatientId(Integer iPatientId) {
-		return insuranceRepository.findByiPatientId(iPatientId);
+		if (iPatientId != null) {
+			Insurance foundInsurance = insuranceRepository.findByiPatientId(iPatientId);
+			if (foundInsurance != null) {
+				return foundInsurance;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 	
 	//SAVE NEW INSURANCE
 	public Insurance saveNewInsurance(Insurance insurance) {
-		return insuranceRepository.save(insurance);
+		if (insurance != null) {
+			if (insuranceRepository.findByiPatientId(insurance.getiPatientId()) == null) {
+				return insuranceRepository.save(insurance);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	//UPDATE INSURANCE
+	public Insurance updateInsurance(Insurance updateInsurance) {
+		if (updateInsurance != null) {
+			if (insuranceRepository.findByiPatientId(updateInsurance.getiPatientId()) != null) {
+				return insuranceRepository.save(updateInsurance);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+	
+	//DELETE INSURANCE
+	public boolean deleteInsurance(Insurance deleteInsurance) {
+		if (deleteInsurance != null) {
+			if (insuranceRepository.findByiPatientId(deleteInsurance.getiPatientId()) != null) {
+				insuranceRepository.delete(deleteInsurance);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }
