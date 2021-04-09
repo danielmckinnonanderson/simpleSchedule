@@ -31,29 +31,27 @@ public class PatientSearchController {
 	private ContactService contactService;
 	private InsuranceService insuranceService;
 	private PatientService patientService;
-	private StaffService staffService;
+
 	
 	@Autowired
-	public PatientSearchController(AppointmentService appointmentService, PatientService patientService, StaffService staffService,
+	public PatientSearchController(AppointmentService appointmentService, PatientService patientService,
 			ContactService contactService, InsuranceService insuranceService) {
 		this.appointmentService = appointmentService;
 		this.contactService = contactService;
 		this.insuranceService = insuranceService;
 		this.patientService = patientService;
-		this.staffService = staffService;
 	}
 	
+	//search for a patient
+	
 	@GetMapping("/patient_search")
-	public String showPatientSearch(Model model, HttpSession session) {
-		if (session.getAttribute("doctorList") == null) {
-			List<Staff> doctorList = staffService.findAllDoctors();
-			session.setAttribute("doctorList", doctorList);
-		}
+	public String showPatientSearch(Model model) {
+		//initialize model attribute 'searchPatient' for data-binding form
 		model.addAttribute("searchPatient", new Patient());
 		return "patient_search";
 	}
 	
-	
+	//retrieve form inputs and bind to 'searchPatient'
 	@PostMapping("/patient_search")
 	public String processPatientSearch(
 			@ModelAttribute("searchPatient") Patient searchPatient,
@@ -64,12 +62,13 @@ public class PatientSearchController {
 			model.addAttribute("error", result.getFieldError());
 			return "patient_search";
 		}
+		//query database using attribute values of searchPatient, set result list to model attribute 'resultsList'
 		List<Patient> resultsList = patientService.findPatientUsingFields(searchPatient);
 		model.addAttribute("resultsList", resultsList);
-
 		return "patient_search_results";
 	}
 	
+	//called when user selects a patient from results to view patient details
 	@PostMapping("/patient_search_results")
 	public String processViewPatientDetails(
 			@RequestParam("viewId") Integer viewId,
@@ -77,6 +76,7 @@ public class PatientSearchController {
 			Model model) {
 		//find viewPatient using patient Id
 		Patient viewPatient = patientService.findByPId(viewId); 
+		//#TODO move catch to service layer
 		//if viewPatient does not exist throw exception
 		if (viewPatient == null) {
 			try {
@@ -96,13 +96,14 @@ public class PatientSearchController {
 		}
 	}
 	
-	//REQUEST METHODS FOR DELETING A PATIENT AND THEIR RELEVANT INFO
+	//remove patient and all associated data from database
+	//delete_patient prompts user to confirm choice to delete
 	@GetMapping("/delete_patient")
 	public String showDeletePatientForm() {
 		return "delete_patient";
 	}
 	
-	
+	//called when user confirms deletion for selected patient
 	@PostMapping("/delete_patient")
 	public String deletePatient(
 			@SessionAttribute("viewPatient") Patient viewPatient,
@@ -117,18 +118,19 @@ public class PatientSearchController {
 	}
 	
 	
-	//REQUEST METHODS CALLED FOR UPDATING SECTIONS ON THE PATIENT_DETAILS PAGE
+	//update an existing patient
 	
 	//UPDATE PATIENT INFO
 	@GetMapping("/update_info")
 	public String updatePatientInfo(
 			@SessionAttribute("viewPatient") Patient viewPatient,
 			Model model) {
-		//add model attribute to store updated information
+		//initialize model attribute 'updatePatient' for data-binding form
 		model.addAttribute("updatePatient", new Patient());
 		return "update_info";
 	}
 	
+	//retrieve form inputs and bind to 'updatePatient'
 	@PostMapping("/update_info")
 	public String mergePatientInfo(
 			@SessionAttribute("viewPatient") Patient oldPatient,
@@ -139,7 +141,7 @@ public class PatientSearchController {
 		if (result.hasErrors()) {
 			return "update_info";
 		}
-		System.out.println("updatePatient: " + updatePatient);
+		//assign 'viewPatient' to 'oldPatient' to compare attributes for update
 		//call patient service method to parse null values and update non-null fields for patient
 		Patient updatedPatient = patientService.updatePatient(oldPatient, updatePatient);
 		
@@ -155,10 +157,12 @@ public class PatientSearchController {
 	public String updatePatientContact(
 			@SessionAttribute("viewContact") Contact viewContact,
 			Model model) {
+		//initialize model attribute 'updateContact' for data-binding form
 		model.addAttribute("updateContact", new Contact());
 		return "update_contact";
 	}
 	
+	//retrieve form inputs and bind to 'updateContact'
 	@PostMapping("/update_contact")
 	public String mergePatientContact(
 			@ModelAttribute("updateContact") Contact updateContact,
@@ -168,7 +172,7 @@ public class PatientSearchController {
 		if (result.hasErrors()) {
 			return "update_contact";
 		}
-		System.out.println("updateContact: " + updateContact);
+		//assign 'viewContact' to 'oldContact' to compare attributes for update
 		//call contact service method to update contact
 		Contact updatedContact = contactService.updateContact(updateContact);
 		
@@ -184,10 +188,12 @@ public class PatientSearchController {
 	public String updatePatientInsurance(
 			@SessionAttribute("viewInsurance") Insurance viewInsurance,
 			Model model) {
+		//initialize model attribute 'updateInsurance' for data-binding form
 		model.addAttribute("updateInsurance", new Insurance());
 		return "update_insurance";
 	}
 	
+	//retrieve form inputs and bind to 'updateInsurance'
 	@PostMapping("/update_insurance")
 	public String mergePatientInsurance(
 			@ModelAttribute("updateInsurance") Insurance updateInsurance,
@@ -197,7 +203,7 @@ public class PatientSearchController {
 		if (result.hasErrors()) {
 			return "update_contact";
 		}
-		System.out.println("updateInsurance: " + updateInsurance);
+		//assign 'viewInsurance' to 'oldInsurance' to compare attributes for update
 		//call insurance service method to update insurance
 		Insurance updatedInsurance = insuranceService.updateInsurance(updateInsurance);
 		

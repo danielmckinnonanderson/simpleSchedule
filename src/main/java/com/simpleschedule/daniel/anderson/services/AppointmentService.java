@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,21 @@ public class AppointmentService {
 	}
 	
 	public Appointment findByAId(Integer aId) {
-		return appointmentRepository.findByAId(aId);
+		if (aId != null) {
+			Appointment foundAppointment = appointmentRepository.findByAId(aId);
+			if (foundAppointment != null) {
+				return foundAppointment;
+			} else {
+				try {
+					throw new EntityNotFoundException("Patient not found under specified ID");
+				} catch (EntityNotFoundException enfe) {
+					System.out.println(enfe.getMessage());
+				}
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 	
 	//GET ALL APPOINTMENTS FOR SPECIFIED PATIENT
@@ -36,25 +52,38 @@ public class AppointmentService {
 	
 	//ADD A NEW APPOINTMENT TO THE DATABASE
 	public Appointment saveAppointment(Appointment appointment) {
-		return appointmentRepository.save(appointment);
+		if (appointment != null) {
+			if (appointmentRepository.findByAId(appointment.getaId()) != null) {
+				return appointmentRepository.save(appointment);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 	
 	//DELETE AN APPOINTMENT
-	public void deleteAppointment(Integer aId) {
-		appointmentRepository.deleteById(aId);
+	public boolean deleteAppointment(Integer aId) {
+		if (appointmentRepository.findByAId(aId) != null ) {
+			appointmentRepository.deleteById(aId);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	//PUBLIC METHOD RETURNING MAP
 	public Map<Integer, Appointment> findAppointmentsUsingFields(Appointment searchAppointment) {
 		Map<Integer, Appointment> appointmentMap = new HashMap<>();
-		for (Appointment appointment : findAppointmentUsingFields(searchAppointment)) {
+		for (Appointment appointment : parseAppointmentFields(searchAppointment)) {
 			appointmentMap.put(appointment.getaId(), appointment);
 		}
 		return appointmentMap;
 	}
 	
 	//METHOD FOR DISCERNING USER INPUTS AND CALLING APPROPRIATE QUERY METHOD
-	private List<Appointment> findAppointmentUsingFields(Appointment appointment) {
+	private List<Appointment> parseAppointmentFields(Appointment appointment) {
 		if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaLocationId() != null && appointment.getaPrimaryId() != null) {
 			return findByADateAndATimeStartAndALocationIdAndAPrimaryId(appointment.getaDate(), appointment.getaTimeStart(), appointment.getaLocationId(), appointment.getaPrimaryId());
 		} else if (appointment.getaDate() != null && appointment.getaTimeStart() != null && appointment.getaLocationId() != null) {

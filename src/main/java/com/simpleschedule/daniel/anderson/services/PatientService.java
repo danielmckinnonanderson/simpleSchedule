@@ -20,18 +20,43 @@ public class PatientService {
 	
 	//SINGLE FINDER METHOD FOR ID
 	public Patient findByPId(Integer pId) {
-		return patientRepository.findByPId(pId);
+		if (pId != null) {
+			Patient foundPatient = patientRepository.findByPId(pId);
+			if (foundPatient != null) {
+				return foundPatient;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 	
 	//SAVE NEW PATIENT
 	public Patient saveNewPatient(Patient patient) {
-		return patientRepository.save(patient);
+		if (patient != null) {
+			if (patientRepository.findByPId(patient.getpId()) == null) {
+				return patientRepository.save(patient);
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 	
 	//DELETE PATIENT
-	public void deletePatient(Patient deletePatient) {
-		patientRepository.delete(deletePatient);
-		System.out.println("REMOVED: " + deletePatient);
+	public boolean deletePatient(Patient deletePatient) {
+		if (deletePatient != null) {
+			if (patientRepository.findByPId(deletePatient.getpId()) != null) {
+				patientRepository.delete(deletePatient);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 	
 	//DISCERNING USER INPUT AND ROUTING TO APPROPRIATE QUERY METHOD
