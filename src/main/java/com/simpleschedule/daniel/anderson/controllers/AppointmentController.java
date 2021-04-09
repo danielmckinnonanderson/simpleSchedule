@@ -1,8 +1,6 @@
 package com.simpleschedule.daniel.anderson.controllers;
 
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.simpleschedule.daniel.anderson.entities.Appointment;
-import com.simpleschedule.daniel.anderson.entities.Location;
 import com.simpleschedule.daniel.anderson.entities.Patient;
-import com.simpleschedule.daniel.anderson.entities.Staff;
 import com.simpleschedule.daniel.anderson.services.AppointmentService;
 
 @Controller
@@ -32,15 +28,17 @@ public class AppointmentController {
 		this.appointmentService = appointmentService;
 	}
 	
+	//search for an appointment
+	
 	@GetMapping("/appointment_search")
 	public String showAppointmentSearch(
-			@SessionAttribute(required=true, name="locationMap") HashMap<Integer, Location> locationMap,
-			@SessionAttribute(required=true, name="doctorList") List<Staff> doctorList,
 			Model model) {
+		//initialize model attribute 'searchAppointment' for data-binding form
 		model.addAttribute("searchAppointment", new Appointment());
 		return "appointment_search";
 	}
 	
+	//retrieve form inputs and bind to 'searchAppointment'
 	@PostMapping("/appointment_search")
 	public String processAppointmentSearch(
 			@ModelAttribute("searchAttribute") Appointment searchAppointment,
@@ -49,28 +47,28 @@ public class AppointmentController {
 		if (result.hasErrors()) {
 			return "appointment_search";
 		}
-		System.out.println(searchAppointment);
+		//query database using 'searchAppointment's attributes and set result list to session attribute 'appointmentList'
 		session.setAttribute("appointmentList", appointmentService.findAppointmentsUsingFields(searchAppointment));
 		return "appointment_search_results";
 	}
 	
+	//add a new appointment
+	
 	@GetMapping("/appointment_add")
 	public String showAppointmentAdd(
-			@SessionAttribute(required=true, name="locationMap") HashMap<Integer, Location> locationMap,
-			@SessionAttribute(required=true, name="doctorList") List<Staff> doctorList,
 			@SessionAttribute("viewPatient") Patient viewPatient,
 			Model model) {
+		//initialize model attribute 'newAppointment' for data-binding form
 		model.addAttribute("newAppointment", new Appointment());
-		System.out.println(viewPatient);
 		return "appointment_add";
 	}
 	
+	//retrieve form inputs and bind to 'newAppointment'
 	@PostMapping("/appointment_add")
 	public String processNewAppointment(
 			@ModelAttribute("newAppointment") Appointment newAppointment,
 			BindingResult result,
 			@SessionAttribute("viewPatient") Patient viewPatient,
-			@SessionAttribute(required=true, name="locationMap") HashMap<Integer, Location> locationMap,
 			HttpSession session,
 			Model model) {
 		model.addAttribute("hasErrors", result.hasErrors());
@@ -79,31 +77,35 @@ public class AppointmentController {
 			return "/appointment_add";
 		}
 		//persist newAppointment to the database
-		Appointment savedAppointment = appointmentService.saveAppointment(newAppointment);
-		System.out.println(savedAppointment);
+		appointmentService.saveAppointment(newAppointment);
 		//re-fetch list of patient's appointments to be displayed on patient_details
 		session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewPatient.getpId()));
 		return "patient_details";
 	}
 	
-	//REQUEST METHODS FOR DELETING AN APPOINTMENT
+	//delete an appointment
+	
 	@GetMapping("/delete_appointment")
 	public String showDeleteAppointmentForm(
 			@RequestParam("appointmentId") Integer aId,
 			@SessionAttribute("viewAppointments") Map<Integer, Appointment> appointmentList,
 			Model model) {
+		//add parameter aId of selected appointment to model
 		model.addAttribute("aId", aId);
+		//retrieve value of appointment from appointmentList with aId, set value to model attribute 'deleteAppointment'
 		model.addAttribute("deleteAppointment", appointmentList.get(aId));
-		System.out.println("Integer aId: " + aId );
+		//send to delete_appointment to prompt user to confirm deletion
 		return "delete_appointment";
 	}
 	
+	//if user confirms deletion, proceed
 	@PostMapping("/delete_appointment")
 	public String deleteAppointment(
 			@RequestParam("aId") Integer aId,
 			Model model) {
-		//call service method to delete appointment
+		//call service method to delete appointment by appointmentId
 		appointmentService.deleteAppointment(aId);
+		//send user back to homepage
 		return "redirect:/";
 	}
 }
