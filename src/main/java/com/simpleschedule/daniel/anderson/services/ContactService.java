@@ -12,7 +12,7 @@ public class ContactService {
 	private ContactRepository contactRepository;
 	
 	@Autowired
-	ContactService(ContactRepository contactRepository) {
+	public ContactService(ContactRepository contactRepository) {
 		this.contactRepository = contactRepository;
 	}
 	
