@@ -75,7 +75,7 @@
 					<tbody id='results_body'>
 						<c:forEach var="appointment" items="${viewAppointments}">
 							<tr>
-								<form:form path="./delete_appointment" method="get" action ="./delete_appointment">
+								<form:form path="delete_appointment" method="get" action ="./delete_appointment">
 									<td><p><fmt:formatDate value="${appointment.value.aDate}" type="date" pattern="MM-dd-YY"/></p></td>
 									<td><p><fmt:formatDate value="${appointment.value.aTimeStart}" type="time" pattern="hh:mm a"/></p></td>
 									<td><p><fmt:formatDate value="${appointment.value.aTimeEnd}" type="time" pattern="hh:mm a"/></p></td>

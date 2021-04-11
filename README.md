@@ -53,7 +53,11 @@ A user story that I felt was very important to implement was that of a user want
 
 **Version History**
 
-- *v1.0 (released 4/9/21)*:
+*v1.0.1*:
+- Bugfixes: Appointment Search is no longer broken, Appointment Search now displays patient's name instead of ID, deleting a patient now also deletes all their appointments
+
+
+*v1.0 (released 4/9/21)*:
 - Basic workflow of application, CRUD function for Patient and Appointment model objects
 - Simplistic but visually pleasing stylesheet 
 - JPA functionality with local database called 'simpleSchedule'

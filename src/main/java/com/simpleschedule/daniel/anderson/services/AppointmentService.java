@@ -23,6 +23,7 @@ public class AppointmentService {
 		this.appointmentRepository = appointmentRepository;
 	}
 	
+	//FIND APPOINTMENT BY ID
 	public Appointment findByAId(Integer aId) {
 		if (aId != null) {
 			Appointment foundAppointment = appointmentRepository.findByAId(aId);
@@ -68,6 +69,16 @@ public class AppointmentService {
 	public boolean deleteAppointment(Integer aId) {
 		if (appointmentRepository.findByAId(aId) != null ) {
 			appointmentRepository.deleteById(aId);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	//DELETE ALL APPOINTMENTS FOR PATIENTID
+	public boolean deleteAllAppointmentsForPatient(Integer aPatientId) {
+		if (aPatientId != null) {
+			appointmentRepository.deleteAll(appointmentRepository.findByAPatientId(aPatientId));
 			return true;
 		} else {
 			return false;

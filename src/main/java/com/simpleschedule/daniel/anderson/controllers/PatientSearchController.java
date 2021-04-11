@@ -76,24 +76,13 @@ public class PatientSearchController {
 			Model model) {
 		//find viewPatient using patient Id
 		Patient viewPatient = patientService.findByPId(viewId); 
-		//#TODO move catch to service layer
-		//if viewPatient does not exist throw exception
-		if (viewPatient == null) {
-			try {
-				throw new EntityNotFoundException("Patient not found under specified ID");
-			} catch (EntityNotFoundException enfe) {
-				System.out.println(enfe.getMessage());
-			}
-			return "index";
-		} else {
-			//add session attributes for all of viewPatient's relevant info to be displayed on patient_details
-			session.setAttribute("viewPatient", viewPatient);
-			session.setAttribute("viewContact", contactService.findContactBycPatientId(viewId));
-			session.setAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
-			//TO DO: add location service to retrieve preferred location for this patient
-			session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewId));
-			return "patient_details";
-		}
+		//add session attributes for all of viewPatient's relevant info to be displayed on patient_details
+		session.setAttribute("viewPatient", viewPatient);
+		session.setAttribute("viewContact", contactService.findContactBycPatientId(viewId));
+		session.setAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
+		//TO DO: add location service to retrieve preferred location for this patient
+		session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewId));
+		return "patient_details";
 	}
 	
 	//remove patient and all associated data from database
@@ -112,6 +101,7 @@ public class PatientSearchController {
 		//call service methods to delete patient, contact, and insurance
 		contactService.deleteContact(viewContact);
 		insuranceService.deleteInsurance(viewInsurance);
+		appointmentService.deleteAllAppointmentsForPatient(viewPatient.getpId());
 		patientService.deletePatient(viewPatient);
 		//return to index
 		return "index";
