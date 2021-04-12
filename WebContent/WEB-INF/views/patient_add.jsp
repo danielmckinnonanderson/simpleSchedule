@@ -22,52 +22,48 @@
 		<section id='container_body'>
 			<div class="container_field">
 				<div id="container_field_header">
-					<h1>add a first-time patient:</h1>
-					<h5>*starred fields are required*</h5>
+					<h1>Add a first-time patient</h1>
+					<h4>*Starred fields are required*</h4>
 				</div>
 				<div>
-					<h3>Patient Information</h3>
+					<h3 id="patient_add_header">Patient Information</h3>
 					<form:form action="./patient_add" method="post"
 						modelAttribute="newPatient">
 						<div class="form_row">
-							<h4 style="color: red;">*</h4>
-							<h4>First name:</h4>
-							<form:input path="pFirstName" type="text"
+							<h4>* First name:</h4>
+							<form:input path="pFirstName" type="text" id="form_input_namef"
 								class="form_input_large" placeholder="Patient first name" />
-							<p>
-								<form:errors path="pFirstName" />
-							</p>
 						</div>
 						<div class="form_row">
-							<h4 style="color: red;">*</h4>
-							<h4>Last name:</h4>
-							<form:input path="pLastName" type="text" class="form_input_large"
-								placeholder="Patient last name" />
-							<p>
-								<form:errors path="pLastName" />
-							</p>
+							<h4>* Last name:</h4>
+							<form:input path="pLastName" type="text" id="form_input_namel"
+								class="form_input_large" placeholder="Patient last name" />
 						</div>
 						<div class="form_row">
-							<h4 style="color: red;">*</h4>
-							<h4>Birth Date:</h4>
-							<form:input path="pDob" type="date" name="dob" id="form_dob" />
-							<p>
-								<form:errors path="pDob" />
-							</p>
-
-							<h4>Primary Doctor:</h4>
-							<form:select path="pPrimary">
-								<option value="">Select</option>
-								<c:forEach items="${doctorList}" var="doctor">
-									<option value="${doctor.sId}">${doctor.sLastName}</option>
-								</c:forEach>
-							</form:select>
-							<p>
-								<form:errors path="pPrimary" />
-							</p>
+							<div class="form_row">
+								<h4>* Birth Date:</h4>
+								<form:input path="pDob" type="date" name="dob" id="form_dob" />
+							</div>
+							<div class="form_row">
+								<h4>Primary Doctor:</h4>
+								<form:select path="pPrimary" id="form_doctor">
+									<option value="">Select</option>
+									<c:forEach items="${doctorList}" var="doctor">
+										<option value="${doctor.sId}">${doctor.sLastName}</option>
+									</c:forEach>
+								</form:select>
+							</div>
 						</div>
-						<div class="form_row" style="justify-content: center;">
-							<input type="submit" value="Next: Insurance Info" id="form_add">
+						<c:if test ="${hasErrors}">
+							<div id="form_errorbox">
+								<p><form:errors path="pFirstName"/></p>
+								<p><form:errors path="pLastName"/></p>
+								<p><form:errors path="pDob"/></p>
+								<p><form:errors path="pPrimary"/></p>
+							</div>
+						</c:if>
+						<div class="form_row" style="justify-content: center; margin-top: 30px;">
+							<input type="submit" value="Next: Insurance Info" class="form_button">
 						</div>
 					</form:form>
 				</div>
