@@ -22,9 +22,8 @@
 		<!-- PAGE BODY -->
 		<section id='container_body'>
 			<div class="container_field">
+				<h1 style="color: #917640;">Results</h1>
 
-				<h1>results:</h1>
-				
 				<table id='results_table'>
 					<thead id='results_header'>
 						<tr>
@@ -44,7 +43,7 @@
 									<td><p><fmt:formatDate value="${patient.pDob}" type="date" pattern="MM-dd-YYYY" /></p></td>
 									<td><p><c:out value="${doctorList.get(patient.pPrimary-1).sLastName}" /></p></td>
 									<input type=hidden name="viewId" value="${patient.pId}"/>
-									<td><input type="submit" value="View Details"/></td>
+									<td><input type="submit" value="View Details" class="results_button"/></td>
 								</form:form>
 							</tr>
 						</c:forEach>
