@@ -3,7 +3,7 @@
 
 Created for TEKGlobal Java Developer course
 
-version 1.0 released April 9, 2021
+version 1.1 released April 11, 2021
 
 [GitHub](https://github.com/danielmckinnonanderson/simpleSchedule)
 
@@ -55,7 +55,7 @@ While the functionality was largely working well, I wanted to improve the visual
 
 **Version History**
 
-*v1.1*:
+*v1.1 (released 4/11/2021)*:
 - Visual overhaul to make things prettier
 
 
