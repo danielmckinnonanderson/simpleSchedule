@@ -11,7 +11,7 @@ version 1.0 released April 9, 2021
 
 **First-time Setup**
 
-Navigate to the folder 'database', and run the SQL file 'initialize_simpleScheduleDB' to create the tables and intial data
+Navigate to the folder 'database', and run the SQL file 'initialize_simpleScheduleDB' to create the tables and initial data
 
 -------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ With this goal in mind, I designed the application with user experience at the f
 - As a scheduler, I don't want to have to spend most of my day looking at an eyesore.
 - As a scheduler, I want to be able to find patients by as many or as few details as I have.
 - As a patient, I want to provide necessary information quickly and without redundancy.
-- As a patient, I don't want it to be able to update my personal information as it changes.
+- As a patient, I want to be able to update my personal information as it changes.
 - As a scheduler, I want to be able to easily alter data and correct mistakes that may come up.
 - As a biller, I want to access patient's insurance information without having to jump through hoops in the computer system.
 - As a patient, I want to have the option to have all my personal information completely removed from the system.
@@ -48,10 +48,16 @@ One of the more difficult issues I dealt with was the referencing of ID values f
 
 A user story that I felt was very important to implement was that of a user wanting to be prompted to confirm a potentially destructive choice. When buttons on a page look somewhat similar (and even when they don't) it's very easy to click something you didn't mean to. In this case, clicking delete on accident might completely remove a patient and all of their details and appointments from the system! To solve this, I made any destructive action redirect to a page displaying exactly what will be deleted and prompting the user to either go back to the page they were viewing previously if they made a mistake, or proceed with the deletion by clicking continue. Accidents happen, and a good application should protect users from their potentially dangerous mistakes.
 
+While the functionality was largely working well, I wanted to improve the visuals to really make things clean and easy to read. This resulted in some other changes on the jsp files in order to accomodate the new CSS. Despite all the database connectivity, Java-based controllers, and complicated service-layer logic, this CSS was the most frustrating task to tackle. The method to the madness prevented a full-on spiral into dismay: Only change one thing at a time until it works. It was really important to me to have the front-end looking really crisp, and as a result it can be easy to get too overzealous with wide-ranging changes only to find that your page is no longer readable and you don't know what sent things astray. While it ended up being rather time-consuming, it's probably safe to assume that going crazy on the stylesheet before checking out the changes would've resulted in many more hours of scanning line-by-line.
+
 
 ------------------------------------------------------------------------
 
 **Version History**
+
+*v1.1*:
+- Visual overhaul to make things prettier
+
 
 *v1.0.1*:
 - Bugfixes: Appointment Search is no longer broken, Appointment Search now displays patient's name instead of ID, deleting a patient now also deletes all their appointments
