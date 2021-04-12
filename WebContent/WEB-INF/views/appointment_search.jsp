@@ -21,32 +21,40 @@
 		<section id='container_body'>
 			<div class="container_field">
 				<div id="container_field_header">
-					<h1>find an appointment:</h1>
-					<h4>fill out one or more forms to refine search:</h4>
+					<h1>Find an appointment</h1>
+					<h4>Fill out one or more forms to refine search</h4>
 				</div>
-								<div>
+				<div>
 					<form:form action="./appointment_search" method="post" modelAttribute="searchAppointment">
 						<div class="form_row">
-							<h4>Date:</h4>
-							<form:input path="aDate" type="date"/>
-							<h4>Start Time:</h4>
-							<form:input path="aTimeStart" type="time" min="08:00" max="04:30" step="900"/>			
+							<div class="form_row">
+								<h4>Date:</h4>
+								<form:input path="aDate" type="date" id="form_date"/>
+							</div>
+							<div class="form_row">
+								<h4>Start Time:</h4>
+								<form:input path="aTimeStart" type="time" id="form_time" min="08:00" max="04:30" step="900"/>			
+							</div>
 						</div>
 						<div class="form_row">
-							<h4>Location:</h4>
-							<form:select path="aLocationId">
-								<option value=""> Select </option>
-								<c:forEach items="${locationMap}" var="location">
-									<option value="${location.key}">${location.value.lCity}, ${location.value.lState}</option>
-								</c:forEach>
-							</form:select>
-							<h4>Physician:</h4>
-							<form:select path="aPrimaryId">
-								<option value=""> Select </option>
-								<c:forEach items="${doctorList}" var="doctor">
-									<option value="${doctor.sId}">${doctor.sLastName}</option>
-								</c:forEach>
-							</form:select>
+							<div class="form_row">
+								<h4>Location:</h4>
+								<form:select path="aLocationId" id="form_location">
+									<option value=""> Select </option>
+									<c:forEach items="${locationMap}" var="location">
+										<option value="${location.key}">${location.value.lCity}, ${location.value.lState}</option>
+									</c:forEach>
+								</form:select>
+							</div>
+							<div class="form_row">
+								<h4>Physician:</h4>
+								<form:select path="aPrimaryId" id="form_doctor">
+									<option value=""> Select </option>
+									<c:forEach items="${doctorList}" var="doctor">
+										<option value="${doctor.sId}">${doctor.sLastName}</option>
+									</c:forEach>
+								</form:select>
+							</div>
 						</div>
 						<c:if test ="${hasErrors}">
 							<div id="form_errorbox">
@@ -56,8 +64,8 @@
 								<p><form:errors path="aPrimaryId"/></p>
 							</div>
 						</c:if>
-						<div class="form_row" style="justify-content: center;">
-							<input type="submit" value="Search" id="form_submit">
+						<div class="form_row" style="justify-content: center; margin-top: 30px;">
+							<input type="submit" value="Search" class="form_button">
 						</div>
 					</form:form>
 				</div>

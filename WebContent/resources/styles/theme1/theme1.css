@@ -23,16 +23,16 @@ text: primary #ffffff, body #917640, footer #719950
 	flex-flow: column wrap;
 	align-items: stretch;
 	background-color: #2f451d;
-	min-height: 60px;
+	min-height: 70px;
 	padding-top: 30px;
 }
 #container_body {
-	margin:80px 0px 100px 0px;
+	margin:100px 0px 100px 0px;
 }
 #container_footer {
 	background-color: #2f451d;
 	height: 60px;
-	padding: 40px 10px 10px 10px;
+	padding: 20px 30px 10px 30px;
 	color: #719950; 
 }
 /* end layout containers */
@@ -50,6 +50,7 @@ text: primary #ffffff, body #917640, footer #719950
 #container_title{
 	flex-grow: 11;
 	margin-top: 16px;
+	margin-left: 15px;
 	padding-left: 12px;
 }
 #container_title h1 {
@@ -76,10 +77,12 @@ text: primary #ffffff, body #917640, footer #719950
 #dropdown_options {
 	display: none;
 	position: absolute;
+	padding-bottom: 10px;
 	width: 100%;
 	background-color: #2f451d;
 	text-align: center;
 	color: white;
+	border-radius: 0px 0px 0px 10px;
 	z-index: 1;
 }
 /* TODO: fix anchors so clickable area fills box area of option */
@@ -87,6 +90,7 @@ text: primary #ffffff, body #917640, footer #719950
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
+	padding: 3px 0px 3px 0px;
 	color: white;
 }
 /* TODO: fix so displayed menu options cast shadow */
@@ -96,8 +100,6 @@ text: primary #ffffff, body #917640, footer #719950
 }
 #dropdown_options :hover {
 	background-color: #1a3802;
-}
-#dropdown_button :hover {
 }
 /* end header dropdown styling */
 
@@ -110,8 +112,8 @@ text: primary #ffffff, body #917640, footer #719950
 	height: 100px;
 	width: auto;
 	background-color: #ffffde;
-	border: solid #917640 2px;
-	border-radius: 30px;
+	border: solid 2px #917640;
+	border-radius: 25px;
 	text-align: center;
 	box-shadow: 3px 3px 8px 0px  #594721;
 }
@@ -119,7 +121,8 @@ text: primary #ffffff, body #917640, footer #719950
 	display: inline-block;
 	height: 100px;
 	width: 100%;
-	border-radius: 27px;
+	border-radius: 24px;
+	border: solid 2px #917640;
 	text-decoration: none;
 	font-family: 'Poppins', 'Arial' sans-serif;
 	font-size: 26px;
@@ -140,19 +143,46 @@ text: primary #ffffff, body #917640, footer #719950
 
 /* patient_search.html */
 .container_field {
-	margin: 25px 5% 25px 5%;
+	margin: 25px 125px 25px 125px;
 }
-#container_field_header{
-	margin-bottom: 75px;
+#container_field_header {
+	margin-bottom: 60px;
 	text-align: center;
 	color: #917640;
 	font-size: 24px;
 }
+#container_field_header h1 {
+	margin: 0px 0px 15px 0px;
+}
 #container_field_header h4 {
+	margin:0px;
+	font-size: 20px;
 	font-family: 'Comfortaa', 'Arial', sans-serif;
 }
+.form_button {
+	border-radius: 45px;
+	border: solid 1px #2f451d;
+	background-color: #2f451d;
+	color: #ffffff;
+	font-family: 'Poppins';
+	font-size: 16px;
+	padding: 8px 30px 8px 30px;
+}
+.form_button:hover {
+	transform: scale(1.05);
+}
 #form_dob {
+	margin: 15px 60px 15px 30px;
 	font-family: 'Comfortaa', 'Arial', sans-serif;
+	height: 28px;
+}
+#form_doctor {
+	margin: 15px 0px 15px 30px;
+	font-family: 'Poppins';
+}
+#form_doctor option {
+	padding-left: 5px;
+	font-family: 'Poppins';
 }
 #form_errorbox {
 	justify-content: center;
@@ -163,7 +193,6 @@ text: primary #ffffff, body #917640, footer #719950
 	background-color: white;
 	color: red;
 }
-
 .form_input_large {
 	font-family: Arial;
 	margin: 10px 5px 10px 5px;
@@ -171,9 +200,14 @@ text: primary #ffffff, body #917640, footer #719950
 	height: 32px;
 	padding: 2px 5px 1px 5px;
 	font-size: 20px;
-	border: none;
+	border: solid 1px #917640;
 	border-radius: 10px;
-	box-shadow: 0px 0px 1px 1px #917640;
+}
+#form_input_namef {
+	margin-left: 25px;
+}
+#form_input_namel {
+	margin-left: 25px;
 }
 #form_submit {
 	width: 60px;
@@ -185,9 +219,8 @@ text: primary #ffffff, body #917640, footer #719950
 }
 .form_row {
 	display: flex;
-	flex-wrap: nowrap;
 	justify-content: space-between;
-	margin: 5px 10px 5px 10px;
+	flex-wrap: nowrap;
 }
 .form_row h4 {
 	font-family: 'Comfortaa';
@@ -196,22 +229,21 @@ text: primary #ffffff, body #917640, footer #719950
 /* end patient_search.html */
 
 
-/* PATIENT_ADD.HTML STYLING*/
-#provider_select {
-	height: 26px;
-	margin-right: 28px;
+/* PATIENT_SEARCH_RESULTS.HTML STYLING */
+.results_button {
+	border-radius: 45px;
+	border: solid 2px #2f451d;
+	background-color: inherit;
+	color: #2f451d;
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: bolder;
+	padding: 4px 12px 2px 12px;
 }
-#form_email {
-	width: 70%;
+.results_button:hover {
+	background-color: #2f451d;
+	color: #ffffff;
 }
-#form_add {
-	width: 90px;
-	height: 48px;
-}
-/* end patient_add.html*/
-
-
-/* SEARCH_RESULTS.HTML STYLING */
 #results_table {
 	border-collapse: collapse;
 	width: 100%;
@@ -232,6 +264,164 @@ tr:nth-child(even) {
 }
 /* end search_results.html styling	*/
 
+
+/* PATIENT_DETAILS.HTML STYLING */
+#patient_details_header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 35px;
+}
+#patient_details_name {
+	margin: 0px;
+}
+.details_section_header {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	background-color: #2f451d;
+	border-radius: 16px;
+}
+.details_section_title {
+	margin-left: 20px;
+	color: white;
+}
+.details_section_body {
+	margin: 0px 20px 32px 20px;
+}
+.details_section_body h4 {
+	color: #917640;
+	font-size: 14px;
+}
+.details_button {
+	border-radius: 45px;
+	border: solid 2px #2f451d;
+	background-color: #ffffde;
+	color: #2f451d;
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: bolder;
+	margin-right: 20px; 
+	padding: 4px 12px 2px 12px;
+}
+.details_button:hover {
+	background-color: #2f451d;
+	border: solid 2px #ffffde;
+	color: #ffffff;
+}
+.form_button_delete {
+	border-radius: 45px;
+	border: solid 1px #2f451d;
+	background-color: #2f451d;
+	color: #ffffff;
+	font-family: 'Poppins';
+	font-size: 16px;
+	padding: 8px 30px 8px 30px;
+}
+.form_button_delete:hover {
+	transform: scale(1.05);
+	background-color: #f24955;
+	border: solid 1px #f24955;
+}
+.results_button_delete {
+	border-radius: 45px;
+	border: solid 2px #2f451d;
+	background-color: inherit;
+	color: #2f451d;
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: bolder;
+	padding: 4px 12px 2px 12px;
+}
+.results_button_delete:hover {
+	background-color: #f24955;
+	border: 2px solid #f24955;
+	color: #ffffff;
+}
+/* end patient_details.html styling */
+
+
+/* APPOINTMENT_SEARCH.HTML STYLING */
+#form_date {
+	margin: 15px 60px 15px 30px;
+	font-family: 'Comfortaa', 'Arial', sans-serif;
+	height: 28px;
+}
+#form_time {
+	margin: 15px 60px 15px 30px;
+	font-family: 'Comfortaa', 'Arial', sans-serif;
+	height:28px;
+	width: 120px;
+}
+#form_location {
+	margin: 15px 0px 15px 30px;
+	font-family: 'Poppins';
+}
+#form_location option {
+	padding-left: 5px;
+	font-family: 'Poppins';
+}
+
+/* APPOINTMENT_ADD.HTML STYLING */
+#form_time_s {
+	margin: 15px 60px 15px 30px;
+	font-family: 'Comfortaa', 'Arial', sans-serif;
+	height:28px;
+	width: 120px;
+}
+#form_time_e {
+	margin: 15px 60px 15px 30px;
+	font-family: 'Comfortaa', 'Arial', sans-serif;
+	height:28px;
+	width: 120px;
+}
+/* end appointment_add.html */
+
+
+/* PATIENT_ADD.HTML STYLING*/
+#patient_add_header {
+	color: #2f451d;
+}
+/* end patient_add.html*/
+
+/* PATIENT_ADD_INSURANCE.HTML STYLING*/
+#form_provider {
+	margin: 15px 60px 15px 20px;
+	font-family: 'Poppins';
+}
+#form_input_insuranceid {
+	margin-left: 15px;
+	width: 150px;
+}
+#form_input_groupid {
+	margin-left: 15px;
+	margin-right: 108px;
+	width: 110px;
+}
+#form_input_planid {
+	margin-left: 25px;
+	width: 110px;
+}
+/* end patient_add_insurance.html*/
+
+/* PATIENT_ADD_CONTACT.HTML*/
+#form_input_email {
+	margin-left: 20px;
+	width: 500px;
+}
+#form_input_phone1 {
+	margin-left: 20px;
+	width: 150px;
+}
+#form_input_phone2 {
+	margin-left: 20px;
+	margin-right: 34px;
+	width: 150px;
+}
+#form_input_phone3 {
+	margin-left: 20px;
+	width: 150px;
+}
+/* */
 
 
 /* FOOTER STYLING */

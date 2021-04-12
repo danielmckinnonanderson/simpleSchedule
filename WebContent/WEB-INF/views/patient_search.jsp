@@ -22,44 +22,46 @@
 		<section id='container_body'>
 			<div class="container_field">
 				<div id="container_field_header">
-					<h1>find an existing patient:</h1>
-					<h4>fill out one or more forms to refine search:</h4>
+					<h1>Find an existing patient</h1>
+					<h4>Fill out one or more forms to refine search</h4>
 				</div>
 				<div>
 					<form:form action="./patient_search" method="post" modelAttribute="searchPatient">
 						<div class="form_row">
 							<h4>First name:</h4>
-							<form:input path="pFirstName" type="text"
+							<form:input path="pFirstName" type="text" id="form_input_namef"
 								class="form_input_large" placeholder="Patient first name" />								
 						</div>
 						<div class="form_row">
 							<h4>Last name:</h4>
-							<form:input path="pLastName" type="text" class="form_input_large"
-								placeholder="Patient last name" />							
+							<form:input path="pLastName" type="text" id="form_input_namel"
+								class="form_input_large" placeholder="Patient last name" />							
 						</div>
 						<div class="form_row">
-							<h4>Birth Date:</h4>
-							<form:input path="pDob" type="date" name="dob" id="form_dob" />								
-								
-							<h4>Primary Doctor:</h4>
-							<form:select path="pPrimary">
-							<!-- dynamic code below, implement later -->
-								<option value=""> Select </option>
-								<c:forEach items="${doctorList}" var="doctor">
-									<option value="${doctor.getsId()}">${doctor.getsLastName()}</option>
-								</c:forEach>
-							</form:select>														
+							<div class="form_row">
+								<h4>Birth Date:</h4>
+								<form:input path="pDob" type="date" name="dob" id="form_dob" />								
+							</div>
+							<div class="form_row">
+								<h4>Primary Doctor:</h4>
+								<form:select path="pPrimary" id="form_doctor">
+									<option value=""> Select </option>
+									<c:forEach items="${doctorList}" var="doctor">
+										<option value="${doctor.getsId()}">${doctor.getsLastName()}</option>
+									</c:forEach>
+								</form:select>	
+							</div>						
 						</div>
 						<c:if test ="${hasErrors}">
-						<div id="form_errorbox">
-							<p><form:errors path="pFirstName"/></p>
-							<p><form:errors path="pLastName"/></p>
-							<p><form:errors path="pDob"/></p>
-							<p><form:errors path="pPrimary"/></p>
-						</div>
+							<div id="form_errorbox">
+								<p><form:errors path="pFirstName"/></p>
+								<p><form:errors path="pLastName"/></p>
+								<p><form:errors path="pDob"/></p>
+								<p><form:errors path="pPrimary"/></p>
+							</div>
 						</c:if>
-						<div class="form_row" style="justify-content: center;">
-							<input type="submit" value="Search" id="form_submit">
+						<div class="form_row" style="justify-content: center; margin-top: 30px;">
+							<input type="submit" value="Search" class="form_button">
 						</div>
 					</form:form>
 				</div>

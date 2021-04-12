@@ -128,7 +128,9 @@ public class PatientSearchController {
 			BindingResult result,
 			HttpSession session,
 			Model model) {
+		model.addAttribute("hasErrors", result.hasErrors());
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "update_info";
 		}
 		//assign 'viewPatient' to 'oldPatient' to compare attributes for update
@@ -160,6 +162,7 @@ public class PatientSearchController {
 			HttpSession session,
 			Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "update_contact";
 		}
 		//assign 'viewContact' to 'oldContact' to compare attributes for update
@@ -191,7 +194,8 @@ public class PatientSearchController {
 			HttpSession session,
 			Model model) {
 		if (result.hasErrors()) {
-			return "update_contact";
+			model.addAttribute("error", result.getFieldError());
+			return "update_insurance";
 		}
 		//assign 'viewInsurance' to 'oldInsurance' to compare attributes for update
 		//call insurance service method to update insurance

@@ -49,7 +49,9 @@ public class PatientAddController {
 			BindingResult result,
 			HttpSession session,
 			Model model) { 
+		model.addAttribute("hasErrors", result.hasErrors());
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "patient_add";
 		}
 		//set session attribute 'newPatient' equal to the retrieved newPatient object from spring-form
@@ -70,8 +72,10 @@ public class PatientAddController {
 	public String processNewInsurance(
 			@ModelAttribute("newInsurance") Insurance newInsurance,
 			BindingResult result,
+			Model model,
 			HttpSession session) {
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "patient_add_insurance";
 		}
 		//set session attribute 'newInsurance' equal to the retrieved newInsurance object from spring-form
@@ -95,8 +99,10 @@ public class PatientAddController {
 			@SessionAttribute("newInsurance") Insurance newInsurance,
 			@ModelAttribute("newContact") Contact newContact,
 			BindingResult result,
+			Model model,
 			HttpSession session) {
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "patient_add_contact";
 		}
 		//persist newPatient to database
