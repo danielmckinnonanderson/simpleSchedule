@@ -1,7 +1,9 @@
 package com.simpleschedule.daniel.anderson.services;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,15 @@ public class PatientService {
 	@Autowired
 	public PatientService(PatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
+	}
+	
+	//GET ALL PATIENTS AND ASSING TO MAP
+	public Map<Integer, Patient> getAllPatients() {
+		Map<Integer, Patient> allPatients = new HashMap<>();
+		for (Patient patient : patientRepository.findAll()) {
+			allPatients.put(patient.getpId(), patient);
+		}
+		return allPatients;
 	}
 	
 	//SINGLE FINDER METHOD FOR ID

@@ -43,12 +43,16 @@ public class AppointmentController {
 	public String processAppointmentSearch(
 			@ModelAttribute("searchAttribute") Appointment searchAppointment,
 			BindingResult result,
+			Model model,
 			HttpSession session) {
+		model.addAttribute("hasErrors", result.hasErrors());
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "appointment_search";
 		}
 		//query database using 'searchAppointment's attributes and set result list to session attribute 'appointmentList'
 		session.setAttribute("appointmentList", appointmentService.findAppointmentsUsingFields(searchAppointment));
+		
 		return "appointment_search_results";
 	}
 	
@@ -73,8 +77,8 @@ public class AppointmentController {
 			Model model) {
 		model.addAttribute("hasErrors", result.hasErrors());
 		if (result.hasErrors()) {
-			System.out.println("Has Errors: " + result.hasErrors());
-			return "/appointment_add";
+			model.addAttribute("error", result.getFieldError());
+			return "appointment_add";
 		}
 		//persist newAppointment to the database
 		appointmentService.saveAppointment(newAppointment);
@@ -88,12 +92,28 @@ public class AppointmentController {
 	@GetMapping("/delete_appointment")
 	public String showDeleteAppointmentForm(
 			@RequestParam("appointmentId") Integer aId,
-			@SessionAttribute("viewAppointments") Map<Integer, Appointment> appointmentList,
+			@SessionAttribute(required=false, name="allPatients") Map<Integer, Patient> allPatients,
+			@SessionAttribute(required=false, name="appointmentList") Map<Integer, Appointment> appointmentList,
+			@SessionAttribute(required=false, name="viewAppointments") Map<Integer, Appointment> viewAppointments,
+			HttpSession session,
 			Model model) {
 		//add parameter aId of selected appointment to model
 		model.addAttribute("aId", aId);
-		//retrieve value of appointment from appointmentList with aId, set value to model attribute 'deleteAppointment'
-		model.addAttribute("deleteAppointment", appointmentList.get(aId));
+		
+		//depending on which page directed to the delete request, get appropriate Map<Integer, Appointment>
+		if (appointmentList != null) {
+			if (appointmentList.size() > 0) {
+				//retrieve value of appointment from appointmentList with aId, set value to model attribute 'deleteAppointment'
+				model.addAttribute("deleteAppointment", appointmentList.get(aId));
+				//set value of 'viewPatient' session attribute equal to patientId of deleteAppointment
+				session.setAttribute("viewPatient", allPatients.get(appointmentList.get(aId).getaPatientId()));
+			}
+		} else if (viewAppointments != null) {
+			if (viewAppointments.size() > 0) {
+				//retrieve value of appointment from appointmentList with aId, set value to model attribute 'deleteAppointment'
+				model.addAttribute("deleteAppointment", viewAppointments.get(aId));
+			}
+		}
 		//send to delete_appointment to prompt user to confirm deletion
 		return "delete_appointment";
 	}

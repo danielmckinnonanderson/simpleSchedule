@@ -29,8 +29,8 @@
 							<h3>This action cannot be undone!</h3>
 							<input type="hidden" value="${viewPatient.pId}"/>
 							<div class="form_row">
-									<button type="submit">Yes, remove patient</button>
-									<input type="button" onclick="history.go(-1);" value="No, go back"/>
+									<input type="button" class="results_button" onclick="history.go(-1);" value="No, go back"/>
+									<button type="submit" class="results_button_delete">Yes, remove patient</button>
 							</div>
 						</form>
 					</div>

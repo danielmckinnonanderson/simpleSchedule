@@ -76,24 +76,13 @@ public class PatientSearchController {
 			Model model) {
 		//find viewPatient using patient Id
 		Patient viewPatient = patientService.findByPId(viewId); 
-		//#TODO move catch to service layer
-		//if viewPatient does not exist throw exception
-		if (viewPatient == null) {
-			try {
-				throw new EntityNotFoundException("Patient not found under specified ID");
-			} catch (EntityNotFoundException enfe) {
-				System.out.println(enfe.getMessage());
-			}
-			return "index";
-		} else {
-			//add session attributes for all of viewPatient's relevant info to be displayed on patient_details
-			session.setAttribute("viewPatient", viewPatient);
-			session.setAttribute("viewContact", contactService.findContactBycPatientId(viewId));
-			session.setAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
-			//TO DO: add location service to retrieve preferred location for this patient
-			session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewId));
-			return "patient_details";
-		}
+		//add session attributes for all of viewPatient's relevant info to be displayed on patient_details
+		session.setAttribute("viewPatient", viewPatient);
+		session.setAttribute("viewContact", contactService.findContactBycPatientId(viewId));
+		session.setAttribute("viewInsurance", insuranceService.findByiPatientId(viewId));
+		//TO DO: add location service to retrieve preferred location for this patient
+		session.setAttribute("viewAppointments", appointmentService.findByAPatientId(viewId));
+		return "patient_details";
 	}
 	
 	//remove patient and all associated data from database
@@ -112,6 +101,7 @@ public class PatientSearchController {
 		//call service methods to delete patient, contact, and insurance
 		contactService.deleteContact(viewContact);
 		insuranceService.deleteInsurance(viewInsurance);
+		appointmentService.deleteAllAppointmentsForPatient(viewPatient.getpId());
 		patientService.deletePatient(viewPatient);
 		//return to index
 		return "index";
@@ -138,7 +128,9 @@ public class PatientSearchController {
 			BindingResult result,
 			HttpSession session,
 			Model model) {
+		model.addAttribute("hasErrors", result.hasErrors());
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "update_info";
 		}
 		//assign 'viewPatient' to 'oldPatient' to compare attributes for update
@@ -170,6 +162,7 @@ public class PatientSearchController {
 			HttpSession session,
 			Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("error", result.getFieldError());
 			return "update_contact";
 		}
 		//assign 'viewContact' to 'oldContact' to compare attributes for update
@@ -201,7 +194,8 @@ public class PatientSearchController {
 			HttpSession session,
 			Model model) {
 		if (result.hasErrors()) {
-			return "update_contact";
+			model.addAttribute("error", result.getFieldError());
+			return "update_insurance";
 		}
 		//assign 'viewInsurance' to 'oldInsurance' to compare attributes for update
 		//call insurance service method to update insurance

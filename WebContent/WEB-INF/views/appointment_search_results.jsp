@@ -23,7 +23,7 @@
 		<section id='container_body'>
 			<div class="container_field">
 
-				<h1>results:</h1>
+				<h1 style="color: #917640;">Results</h1>
 				
 				<table id='results_table'>
 					<thead id='results_header'>
@@ -40,15 +40,15 @@
 					<tbody id='results_body'>
 						<c:forEach var="appointment" items="${appointmentList}">
 								<tr>
-									<form:form action="./delete_appointment" method="get">
+									<form:form path="delete_appointment" method="get" action="./delete_appointment">
 										<td><p><fmt:formatDate value="${appointment.value.aDate}" type="date" pattern="MM-dd-YY"/></p></td>
-										<td><p><c:out value="${appointment.value.aPatientId}" /></p></td>
+										<td><p><c:out value="${allPatients.get(appointment.value.aPatientId).pLastName}, ${allPatients.get(appointment.value.aPatientId).pFirstName.substring(0,1)}"/>.</p></td>
 										<td><p><fmt:formatDate value="${appointment.value.aTimeStart}" type="time" pattern="hh:mm a"/></p></td>
 										<td><p><fmt:formatDate value="${appointment.value.aTimeEnd}" type="time" pattern="hh:mm a"/></p></td>
 										<td><p><c:out value="${locationMap.get(appointment.value.aLocationId).lCity}, ${locationMap.get(appointment.value.aLocationId).lState}" /></p></td>
 										<td><p><c:out value="${doctorList.get(appointment.value.aPrimaryId -1).sLastName}"/></p></td>
-										<input type="hidden">
-										<td><p><a href="./delete_appointment"><button type="button" class="form_button">Delete</button></a></p></td>
+										<input type="hidden" value="${appointment.key}" name="appointmentId">
+										<td><input type="submit" value="Delete" class="results_button_delete"/></td>
 									</form:form>
 								</tr>
 						</c:forEach>
