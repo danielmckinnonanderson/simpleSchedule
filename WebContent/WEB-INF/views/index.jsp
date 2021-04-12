@@ -20,13 +20,13 @@
 
 				<div id='list_body'>
 					<div class="button_body">
-						<a href="./patient_search"><h3>find current patient</h3></a>
+						<a href="./patient_search"><h3>Find current patient</h3></a>
 					</div>
 					<div class="button_body">
-						<a href="./patient_add"><h3>add a first-time patient</h3></a>
+						<a href="./patient_add"><h3>Add a first-time patient</h3></a>
 					</div>
 					<div class="button_body">
-						<a href="./appointment_search"><h3>find existing
+						<a href="./appointment_search"><h3>Find existing
 								appointment</h3></a>
 					</div>
 				</div>
